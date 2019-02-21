@@ -1,0 +1,22 @@
+language: php
+
+php:
+  - 7.1
+  - 7.2
+  - 7.3
+
+# faster builds on new travis setup not using sudo
+sudo: false
+
+# cache vendor dirs
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+install:
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - travis_retry composer install --prefer-dist --no-interaction
+  - travis_retry composer require "phpunit/phpunit:^6.0|^7.0" --update-with-dependencies
+
+script:
+  - phpunit $PHPUNIT_FLAGS
