@@ -19,6 +19,8 @@ use Illuminate\Session\Store;
  *
  * @see \Illuminate\Session\Store
  *
+ * @property \Illuminate\Session\Store $laravelSession related Laravel session instance.
+ *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 1.0
  */

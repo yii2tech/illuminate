@@ -17,9 +17,11 @@
     "require": {
         "yiisoft/yii2": "~2.0.14",
         "illuminate/database": "^5.7",
+        "illuminate/cache": "^5.7",
         "illuminate/console": "^5.7",
+        "illuminate/events": "^5.7",
         "illuminate/http": "^5.7",
-        "illuminate/events": "^5.7"
+        "illuminate/log": "^5.7"
     },
     "repositories": [
         {
