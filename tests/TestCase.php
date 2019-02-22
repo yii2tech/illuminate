@@ -3,8 +3,8 @@
 namespace Yii2tech\Illuminate\Test;
 
 use Yii;
-use yii\helpers\FileHelper;
 use yii\helpers\ArrayHelper;
+use Illuminate\Filesystem\Filesystem;
 
 /**
  * Base class for the test cases.
@@ -12,13 +12,18 @@ use yii\helpers\ArrayHelper;
 class TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
+     * @var \Illuminate\Filesystem\Filesystem file system helper.
+     */
+    private $fileSystem;
+
+    /**
      * {@inheritdoc}
      */
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->mockApplication();
+        $this->mockYiiApplication();
     }
 
     /**
@@ -28,17 +33,30 @@ class TestCase extends \PHPUnit\Framework\TestCase
     {
         parent::tearDown();
 
-        $this->destroyApplication();
+        $this->destroyYiiApplication();
         $this->removeTestFilePath();
     }
 
     /**
-     * Populates Yii::$app with a new application
+     * @return Filesystem file system helper.
+     */
+    protected function getFileSystem(): Filesystem
+    {
+        if ($this->fileSystem === null) {
+            $this->fileSystem = new Filesystem();
+        }
+
+        return $this->fileSystem;
+    }
+
+    /**
+     * Populates `Yii::$app` with a new application
      * The application will be destroyed on tearDown() automatically.
+     *
      * @param array $config The application configuration, if needed
      * @param string $appClass name of the application class to create
      */
-    protected function mockApplication($config = [], $appClass = '\yii\console\Application')
+    protected function mockYiiApplication($config = [], $appClass = \yii\console\Application::class)
     {
         new $appClass(ArrayHelper::merge([
             'id' => 'testapp',
@@ -46,7 +64,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
             'vendorPath' => $this->getVendorPath(),
             'components' => [
                 'db' => [
-                    'class' => 'yii\db\Connection',
+                    'class' => \yii\db\Connection::class,
                     'dsn' => 'sqlite::memory:',
                 ],
             ],
@@ -62,11 +80,12 @@ class TestCase extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Destroys application in Yii::$app by setting it to null.
+     * Destroys application in `Yii::$app` by setting it to null.
      */
-    protected function destroyApplication()
+    protected function destroyYiiApplication()
     {
         Yii::$app = null;
+        Yii::$container = null;
     }
 
     /**
@@ -74,17 +93,19 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     protected function getTestFilePath()
     {
-        return Yii::getAlias('@runtime/spreadsheet-test');
+        return __DIR__.DIRECTORY_SEPARATOR.'tmp';
     }
 
     /**
      * Ensures test file path exists.
+     *
      * @return string test file path
      */
     protected function ensureTestFilePath()
     {
         $path = $this->getTestFilePath();
-        FileHelper::createDirectory($path);
+        $this->getFileSystem()->makeDirectory($path);
+
         return $path;
     }
 
@@ -94,23 +115,26 @@ class TestCase extends \PHPUnit\Framework\TestCase
     protected function removeTestFilePath()
     {
         $path = $this->getTestFilePath();
-        FileHelper::removeDirectory($path);
+        $this->getFileSystem()->deleteDirectory($path);
     }
 
     /**
      * Invokes object method, even if it is private or protected.
-     * @param object $object object.
-     * @param string $method method name.
-     * @param array $args method arguments
+     *
+     * @param  object  $object object.
+     * @param  string  $method method name.
+     * @param  array  $args method arguments
      * @return mixed method result
      */
     protected function invoke($object, $method, array $args = [])
     {
         $classReflection = new \ReflectionClass(get_class($object));
         $methodReflection = $classReflection->getMethod($method);
+
         $methodReflection->setAccessible(true);
         $result = $methodReflection->invokeArgs($object, $args);
         $methodReflection->setAccessible(false);
+
         return $result;
     }
 }
