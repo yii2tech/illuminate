@@ -18,6 +18,8 @@ use Illuminate\Database\Connection as LaravelConnection;
  * Also it is crucial for running queries in transactions, allowing running Laravel and
  * Yii DB queries in the same transaction.
  *
+ * @see \Illuminate\Database\Connection
+ *
  * @property \Illuminate\Database\Connection $laravelConnection related Laravel DB connection.
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
