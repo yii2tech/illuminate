@@ -11,12 +11,12 @@ use Carbon\Laravel\ServiceProvider;
 use Yii2tech\Illuminate\Console\RenameNamespaceCommand;
 
 /**
- * YiiServiceProvider
+ * YiiIlluminateServiceProvider
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 1.0
  */
-class YiiServiceProvider extends ServiceProvider
+class YiiIlluminateServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.

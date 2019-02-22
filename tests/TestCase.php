@@ -2,6 +2,8 @@
 
 namespace Yii2tech\Illuminate\Test;
 
+use Illuminate\Container\Container;
+use Illuminate\Support\Facades\Facade;
 use Yii;
 use yii\helpers\ArrayHelper;
 use Illuminate\Filesystem\Filesystem;
@@ -11,6 +13,11 @@ use Illuminate\Filesystem\Filesystem;
  */
 class TestCase extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @var Container Laravel application mock.
+     */
+    protected $app;
+
     /**
      * @var \Illuminate\Filesystem\Filesystem file system helper.
      */
@@ -23,6 +30,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
     {
         parent::setUp();
 
+        $this->mockLaravelApplication();
         $this->mockYiiApplication();
     }
 
@@ -50,28 +58,6 @@ class TestCase extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Populates `Yii::$app` with a new application
-     * The application will be destroyed on tearDown() automatically.
-     *
-     * @param array $config The application configuration, if needed
-     * @param string $appClass name of the application class to create
-     */
-    protected function mockYiiApplication($config = [], $appClass = \yii\console\Application::class)
-    {
-        new $appClass(ArrayHelper::merge([
-            'id' => 'testapp',
-            'basePath' => __DIR__,
-            'vendorPath' => $this->getVendorPath(),
-            'components' => [
-                'db' => [
-                    'class' => \yii\db\Connection::class,
-                    'dsn' => 'sqlite::memory:',
-                ],
-            ],
-        ], $config));
-    }
-
-    /**
      * @return string vendor path
      */
     protected function getVendorPath()
@@ -80,12 +66,59 @@ class TestCase extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * Creates new Laravel application.
+     */
+    protected function mockLaravelApplication()
+    {
+        $this->app = new Container();
+
+        $db = new \Illuminate\Database\Capsule\Manager;
+
+        $db->addConnection([
+            'driver'    => 'sqlite',
+            'database'  => ':memory:',
+        ]);
+
+        $db->bootEloquent();
+        $db->setAsGlobal();
+
+        $this->app->instance('db', $db);
+
+        Container::setInstance($this->app);
+        Facade::setFacadeApplication($this->app);
+
+        $this->app->bind('db.connection', function ($app) {
+            return $app['db']->connection();
+        });
+    }
+
+    /**
+     * Populates `Yii::$app` with a new application
+     * The application will be destroyed on tearDown() automatically.
+     *
+     * @param array $config The application configuration, if needed
+     * @param string $appClass name of the application class to create
+     */
+    protected function mockYiiApplication($config = [], $appClass = \yii\console\Application::class)
+    {
+        Yii::$app = new $appClass(ArrayHelper::merge([
+            'id' => 'testapp',
+            'basePath' => __DIR__,
+            'vendorPath' => $this->getVendorPath(),
+            'components' => [
+                'db' => [
+                    'class' => \Yii2tech\Illuminate\Yii\Db\Connection::class,
+                ],
+            ],
+        ], $config));
+    }
+
+    /**
      * Destroys application in `Yii::$app` by setting it to null.
      */
     protected function destroyYiiApplication()
     {
         Yii::$app = null;
-        Yii::$container = null;
     }
 
     /**
@@ -116,6 +149,26 @@ class TestCase extends \PHPUnit\Framework\TestCase
     {
         $path = $this->getTestFilePath();
         $this->getFileSystem()->deleteDirectory($path);
+    }
+
+    /**
+     * Get a database connection instance.
+     *
+     * @return \Illuminate\Database\Connection
+     */
+    protected function getDbConnection()
+    {
+        return $this->app->get('db.connection');
+    }
+
+    /**
+     * Get a schema builder instance.
+     *
+     * @return \Illuminate\Database\Schema\Builder
+     */
+    protected function getSchemaBuilder()
+    {
+        return $this->getDbConnection()->getSchemaBuilder();
     }
 
     /**
