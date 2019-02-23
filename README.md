@@ -48,6 +48,7 @@ its installation.
 The BC breaking changes, which are supposed to change the situation, like accepting PSR standards for caching and logging,
 separating JQuery from the Yii core and so on, are frozen till the future 3.0 release, which can not be expected in any
 near future.
+
 Even when Yii 3.0 will be released, it will hold many BC breaking changes and totally different architecture concept,
 regardless of DI and Service Locator usage. This will make migration from Yii 2.x to Yii 3.0 to be the matter of entire
 project rewrite, as it already was for migration from Yii 1.x to Yii 2.0. If this is inevitable fate of your project,
@@ -63,7 +64,7 @@ you will have to face on the chosen path.
 Usage
 -----
 
-Migration of existing project from one PHP framework to another can be done by single day. Most likely you have spent
+Migration of existing project from one PHP framework to another can not be done by single day. Most likely you have spent
 several months or even years to create your current codebase, and its update will also take much time. 
 
 This extension allows running Yii2 and Laravel applications simultaneously at the same project, allowing resolving of
