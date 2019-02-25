@@ -108,3 +108,39 @@ Just remember you should adjust the created migration class.
 Shared Database Connection <span id="shared-database-connection"></span>
 --------------------------
 
+Allowing Laravel and Yii establish their own database connections causes two major problems.
+First of all, database server connection establishing consumes much time. Performing it twice during
+single HTTP request handling may significantly decrease performance. Also this doubles stress taken by
+database server, decreasing its performance as well. But more crucial thing is running database transactions:
+in case transaction is opened by Laravel DB connection any query performed via Yii one will fall out of transaction.
+For example:
+
+```php
+<?php
+
+use Illuminate\Support\Facades\DB;
+
+DB::beginTransaction();
+
+DB::table('users')->update(['votes' => 0]); // will be reverted on 'rollback'
+Yii::$app->db->createCommand()->delete('votes', ['status' => 1])->execute(); // will NOT be reverted on 'rollback'!
+
+DB::rollBack();
+```
+
+You can avoid all these troubles using [[\Yii2tech\Illuminate\Yii\Db\Connection]] class for your Yii DB connection.
+This class allows sharing of the [[\PDO]] instance between Laravel and Yii DB connections, ensuring single connection
+establishment, consistent transaction handling and eliminating necessity to configure database parameters in both
+applications. Yii application configuration example:
+
+```php
+<?php
+
+return [
+    'components' => [
+        'db' => Yii2tech\Illuminate\Yii\Db\Connection::class,
+        // ...
+    ],
+    // ...
+];
+```

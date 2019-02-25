@@ -17,6 +17,18 @@ use Illuminate\Session\Store;
  * This class allows sharing session data between Laravel and Yii, preserving authentication state loss and
  * avoiding session data loss.
  *
+ * Application configuration example:
+ *
+ * ```php
+ * return [
+ *     'components' => [
+ *         'session' => Yii2tech\Illuminate\Yii\Web\Session::class,
+ *         // ...
+ *     ],
+ *     // ...
+ * ];
+ * ```
+ *
  * @see \Illuminate\Session\Store
  *
  * @property \Illuminate\Session\Store $laravelSession related Laravel session instance.
