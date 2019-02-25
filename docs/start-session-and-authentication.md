@@ -20,3 +20,45 @@ return [
     // ...
 ];
 ```
+
+With such configuration session data stored by Laravel will be available in Yii and vice versa.
+However, this is not enough to keep user authentication state. To make it work [[\yii\web\User::$idParam]] should be
+pointed to the same session key Laravel use to store authenticated user ID. You can use following configuration to
+achieve this:
+
+```php
+<?php
+
+return [
+    'components' => [
+        'session' => Yii2tech\Illuminate\Yii\Web\Session::class,
+        'user' => [
+            'idParam' => app()->make('auth')->guard('web')->getName(),
+        ],
+        // ...
+    ],
+    // ...
+];
+```
+
+However, it is much more reliable to use [[\Yii2tech\Illuminate\Yii\Web\User]] class as Yii web user component.
+This class will use Laravel authentication guard directly for user retrieving and storing. This solves authentication
+tracking problem as well as allows usage of any other authentication guard provided by Laravel besides session.
+Yii application configuration example:
+
+```php
+<?php
+
+return [
+    'components' => [
+        'session' => Yii2tech\Illuminate\Yii\Web\Session::class,
+        'user' => Yii2tech\Illuminate\Yii\Web\User::class,
+        // ...
+    ],
+    // ...
+];
+```
+
+**Heads up!** Authentication handle tools, provided by this package, will serve you well in "reading" mode,
+but may still create inconsistences in "writing" mode. It is better to migrate all your code related to user
+identity switching (e.g. login, logout, singup and so on) into Laravel application as soon as possible.
