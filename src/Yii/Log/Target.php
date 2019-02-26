@@ -7,58 +7,35 @@
 
 namespace Yii2tech\Illuminate\Yii\Log;
 
-use yii\log\Logger;
-use Psr\Log\LogLevel;
 use yii\helpers\VarDumper;
-use Illuminate\Log\Logger as LaravelLogger;
 
 /**
  * Target passes log entries to Laravel logger.
  *
- * @property \Illuminate\Log\Logger $laravelLogger related Laravel logger instance.
+ * Application configuration example:
+ *
+ * ```php
+ * return [
+ *     'components' => [
+ *         'log' => [
+ *             'targets' => [
+ *                 [
+ *                     'class' => Yii2tech\Illuminate\Yii\Log\Target::class,
+ *                 ],
+ *             ],
+ *         ],
+ *         // ...
+ *     ],
+ *     // ...
+ * ];
+ * ```
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 1.0
  */
 class Target extends \yii\log\Target
 {
-    /**
-     * @var \Illuminate\Log\Logger laravel logger instance.
-     */
-    private $_laravelLogger;
-
-    /**
-     * @return \Illuminate\Log\Logger
-     */
-    public function getLaravelLogger(): LaravelLogger
-    {
-        if ($this->_laravelLogger === null) {
-            $this->_laravelLogger = $this->defaultLaravelLogger();
-        }
-
-        return $this->_laravelLogger;
-    }
-
-    /**
-     * @param  \Illuminate\Log\Logger  $laravelLogger
-     * @return static self reference.
-     */
-    public function setLaravelLogger(LaravelLogger $laravelLogger): self
-    {
-        $this->_laravelLogger = $laravelLogger;
-
-        return $this;
-    }
-
-    /**
-     * Returns default value for {@link $laravelLogger}
-     *
-     * @return Logger logger instance.
-     */
-    protected function defaultLaravelLogger(): Logger
-    {
-        return \Illuminate\Support\Facades\Log::getFacadeRoot();
-    }
+    use Illuminated;
 
     /**
      * {@inheritdoc}
@@ -82,32 +59,7 @@ class Target extends \yii\log\Target
                 }
             }
 
-            $this->getLaravelLogger()->log($level, $text, $context);
+            $this->getIlluminateLogger()->log($level, $text, $context);
         }
-    }
-
-    /**
-     * Converts Yii log level into PSR one.
-     *
-     * @param  int  $level Yii log level.
-     * @return string PSR log level.
-     */
-    protected function convertLogLevel($level): string
-    {
-        $matches = [
-            Logger::LEVEL_ERROR => LogLevel::ERROR,
-            Logger::LEVEL_WARNING => LogLevel::WARNING,
-            Logger::LEVEL_INFO => LogLevel::INFO,
-            Logger::LEVEL_TRACE => LogLevel::DEBUG,
-            Logger::LEVEL_PROFILE => LogLevel::DEBUG,
-            Logger::LEVEL_PROFILE_BEGIN => LogLevel::DEBUG,
-            Logger::LEVEL_PROFILE_END => LogLevel::DEBUG,
-        ];
-
-        if (isset($matches[$level])) {
-            return $matches[$level];
-        }
-
-        return LogLevel::INFO;
     }
 }
