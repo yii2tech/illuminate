@@ -31,7 +31,7 @@ use Illuminate\Session\Store;
  *
  * @see \Illuminate\Session\Store
  *
- * @property \Illuminate\Session\Store $laravelSession related Laravel session instance.
+ * @property \Illuminate\Session\Store $illuminateSession related Laravel session instance.
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 1.0
@@ -46,27 +46,27 @@ class Session extends \yii\web\Session
     /**
      * @var \Illuminate\Session\Store
      */
-    private $_laravelSession;
+    private $_illuminateSession;
 
     /**
      * @return \Illuminate\Session\Store Laravel session store.
      */
-    public function getLaravelSession(): Store
+    public function getIlluminateSession(): Store
     {
-        if ($this->_laravelSession === null) {
-            $this->_laravelSession = $this->defaultLaravelSession();
+        if ($this->_illuminateSession === null) {
+            $this->_illuminateSession = $this->defaultIlluminateSession();
         }
 
-        return $this->_laravelSession;
+        return $this->_illuminateSession;
     }
 
     /**
      * @param \Illuminate\Session\Store $session Laravel session store.
      * @return static self reference.
      */
-    public function setLaravelSession(Store $session): self
+    public function setIlluminateSession(Store $session): self
     {
-        $this->_laravelSession = $session;
+        $this->_illuminateSession = $session;
 
         return $this;
     }
@@ -74,7 +74,7 @@ class Session extends \yii\web\Session
     /**
      * @return Store session store instance.
      */
-    protected function defaultLaravelSession(): Store
+    protected function defaultIlluminateSession(): Store
     {
         return \Illuminate\Support\Facades\Session::getFacadeRoot();
     }
@@ -96,7 +96,7 @@ class Session extends \yii\web\Session
             return;
         }
 
-        $this->getLaravelSession()->start();
+        $this->getIlluminateSession()->start();
     }
 
     /**
@@ -105,7 +105,7 @@ class Session extends \yii\web\Session
     public function close(): void
     {
         if ($this->getIsActive()) {
-            $this->getLaravelSession()->save();
+            $this->getIlluminateSession()->save();
         }
     }
 
@@ -115,7 +115,7 @@ class Session extends \yii\web\Session
     public function destroy(): void
     {
         if ($this->getIsActive()) {
-            $this->getLaravelSession()->invalidate();
+            $this->getIlluminateSession()->invalidate();
         }
     }
 
@@ -124,7 +124,7 @@ class Session extends \yii\web\Session
      */
     public function getIsActive(): bool
     {
-        return $this->getLaravelSession()->isStarted();
+        return $this->getIlluminateSession()->isStarted();
     }
 
     /**
@@ -132,7 +132,7 @@ class Session extends \yii\web\Session
      */
     public function getId()
     {
-        return $this->getLaravelSession()->getId();
+        return $this->getIlluminateSession()->getId();
     }
 
     /**
@@ -140,7 +140,7 @@ class Session extends \yii\web\Session
      */
     public function setId($value): void
     {
-        $this->getLaravelSession()->setId($value);
+        $this->getIlluminateSession()->setId($value);
     }
 
     /**
@@ -149,7 +149,7 @@ class Session extends \yii\web\Session
     public function regenerateID($deleteOldSession = false): void
     {
         if ($this->getIsActive()) {
-            $this->getLaravelSession()->regenerate($deleteOldSession);
+            $this->getIlluminateSession()->regenerate($deleteOldSession);
         }
     }
 
@@ -158,7 +158,7 @@ class Session extends \yii\web\Session
      */
     public function getName()
     {
-        return $this->getLaravelSession()->getName();
+        return $this->getIlluminateSession()->getName();
     }
 
     /**
@@ -166,7 +166,7 @@ class Session extends \yii\web\Session
      */
     public function setName($value): void
     {
-        $this->getLaravelSession()->setName($value);
+        $this->getIlluminateSession()->setName($value);
     }
 
     /**
@@ -176,7 +176,7 @@ class Session extends \yii\web\Session
     {
         $this->open();
 
-        return new ArrayIterator($this->getLaravelSession()->all());
+        return new ArrayIterator($this->getIlluminateSession()->all());
     }
 
     /**
@@ -186,7 +186,7 @@ class Session extends \yii\web\Session
     {
         $this->open();
 
-        return count($this->getLaravelSession()->all());
+        return count($this->getIlluminateSession()->all());
     }
 
     /**
@@ -196,7 +196,7 @@ class Session extends \yii\web\Session
     {
         $this->open();
 
-        return $this->getLaravelSession()->get($key, $defaultValue);
+        return $this->getIlluminateSession()->get($key, $defaultValue);
     }
 
     /**
@@ -206,7 +206,7 @@ class Session extends \yii\web\Session
     {
         $this->open();
 
-        $this->getLaravelSession()->put($key, $value);
+        $this->getIlluminateSession()->put($key, $value);
     }
 
     /**
@@ -216,9 +216,9 @@ class Session extends \yii\web\Session
     {
         $this->open();
 
-        $value = $this->getLaravelSession()->get($key);
+        $value = $this->getIlluminateSession()->get($key);
 
-        $this->getLaravelSession()->forget($key);
+        $this->getIlluminateSession()->forget($key);
 
         return $value;
     }
@@ -229,7 +229,7 @@ class Session extends \yii\web\Session
     public function removeAll(): void
     {
         $this->open();
-        $this->getLaravelSession()->flush();
+        $this->getIlluminateSession()->flush();
     }
 
     /**
@@ -239,7 +239,7 @@ class Session extends \yii\web\Session
     {
         $this->open();
 
-        return $this->getLaravelSession()->has($key);
+        return $this->getIlluminateSession()->has($key);
     }
 
     // Flash :
@@ -296,7 +296,7 @@ class Session extends \yii\web\Session
         $counters = $this->get($this->flashParam, []);
         $flashes = [];
 
-        $session = $this->getLaravelSession()->all();
+        $session = $this->getIlluminateSession()->all();
 
         foreach (array_keys($counters) as $key) {
             if (array_key_exists($key, $session)) {
@@ -339,7 +339,7 @@ class Session extends \yii\web\Session
         $counters[$key] = $removeAfterAccess ? -1 : 0;
 
         $this->set($this->flashParam, $counters);
-        $session = $this->getLaravelSession()->all();
+        $session = $this->getIlluminateSession()->all();
 
         if (empty($session[$key])) {
             $session[$key] = [$value];
@@ -358,7 +358,7 @@ class Session extends \yii\web\Session
     public function removeFlash($key)
     {
         $counters = $this->get($this->flashParam, []);
-        $session = $this->getLaravelSession()->all();
+        $session = $this->getIlluminateSession()->all();
         $value = isset($session[$key], $counters[$key]) ? $session[$key] : null;
         unset($counters[$key]);
         $this->remove($key);
@@ -395,7 +395,7 @@ class Session extends \yii\web\Session
     public function offsetExists($offset)
     {
         $this->open();
-        $session = $this->getLaravelSession()->all();
+        $session = $this->getIlluminateSession()->all();
 
         return isset($session[$offset]);
     }
@@ -407,7 +407,7 @@ class Session extends \yii\web\Session
     {
         $this->open();
 
-        return $this->getLaravelSession()->get($offset);
+        return $this->getIlluminateSession()->get($offset);
     }
 
     /**
@@ -418,7 +418,7 @@ class Session extends \yii\web\Session
         $this->open();
         $_SESSION[$offset] = $item;
 
-        $this->getLaravelSession()->put($offset, $item);
+        $this->getIlluminateSession()->put($offset, $item);
     }
 
     /**
@@ -428,6 +428,6 @@ class Session extends \yii\web\Session
     {
         $this->open();
 
-        $this->getLaravelSession()->forget($offset);
+        $this->getIlluminateSession()->forget($offset);
     }
 }

@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @see \Illuminate\Auth\AuthManager
  *
- * @property \Illuminate\Auth\AuthManager $laravelAuthManager related Laravel auth manager.
+ * @property \Illuminate\Auth\AuthManager $illuminateAuthManager related Laravel auth manager.
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 1.0
@@ -39,7 +39,7 @@ class User extends \yii\web\User
     /**
      * @var \Illuminate\Auth\AuthManager related Laravel auth manager.
      */
-    private $_laravelAuthManager;
+    private $_illuminateAuthManager;
 
     /**
      * {@inheritdoc}
@@ -47,7 +47,7 @@ class User extends \yii\web\User
     public function getIdentity($autoRenew = true)
     {
         if ($this->_identity === false) {
-            $identity = $this->getLaravelAuthManager()->guard($this->guard)->user();
+            $identity = $this->getIlluminateAuthManager()->guard($this->guard)->user();
             if ($identity !== null) {
                 $identity = $this->convertLaravelIdentity($identity);
             }
@@ -71,22 +71,22 @@ class User extends \yii\web\User
     /**
      * @return \Illuminate\Auth\AuthManager
      */
-    public function getLaravelAuthManager(): AuthManager
+    public function getIlluminateAuthManager(): AuthManager
     {
-        if ($this->_laravelAuthManager === null) {
-            $this->_laravelAuthManager = $this->defaultLaravelRequest();
+        if ($this->_illuminateAuthManager === null) {
+            $this->_illuminateAuthManager = $this->defaultIlluminateAuthManager();
         }
 
-        return $this->_laravelAuthManager;
+        return $this->_illuminateAuthManager;
     }
 
     /**
      * @param  \Illuminate\Auth\AuthManager  $authManager
      * @return static self reference.
      */
-    public function setLaravelAuthManager(AuthManager $authManager): self
+    public function setIlluminateAuthManager(AuthManager $authManager): self
     {
-        $this->_laravelAuthManager = $authManager;
+        $this->_illuminateAuthManager = $authManager;
 
         return $this;
     }
@@ -94,7 +94,7 @@ class User extends \yii\web\User
     /**
      * @return \Illuminate\Auth\AuthManager default Laravel auth manager.
      */
-    protected function defaultLaravelRequest(): AuthManager
+    protected function defaultIlluminateAuthManager(): AuthManager
     {
         return Container::getInstance()->make('auth');
     }
@@ -107,7 +107,7 @@ class User extends \yii\web\User
         $this->setIdentity($identity);
 
         if ($identity === null) {
-            $this->getLaravelAuthManager()->guard($this->guard)->logout();
+            $this->getIlluminateAuthManager()->guard($this->guard)->logout();
 
             return;
         }
@@ -118,7 +118,7 @@ class User extends \yii\web\User
             $id = $identity->id;
         }
 
-        $this->getLaravelAuthManager()->guard($this->guard)->loginUsingId($id);
+        $this->getIlluminateAuthManager()->guard($this->guard)->loginUsingId($id);
     }
 
     /**
