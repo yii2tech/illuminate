@@ -53,6 +53,9 @@ $objectCreatedByYii = Yii::createObject(\HelpSpot\API::class);
 var_dump($objectFromLaravel === $objectCreatedByYii); // outputs 'true'
 ```
 
+> Note: you are able to access Laravel DI container anywhere within your Yii application, using [[\Illuminate\Container\Container::getInstance()]].
+  However, you are not allowed to use Yii DI container or service locator within Laravel application.
+
 
 Yii Components Transfer <span id="di-container-bridge"></span>
 -----------------------

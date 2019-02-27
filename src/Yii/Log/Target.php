@@ -22,6 +22,7 @@ use yii\helpers\VarDumper;
  *                 [
  *                     'class' => Yii2tech\Illuminate\Yii\Log\Target::class,
  *                 ],
+ *                 // ...
  *             ],
  *         ],
  *         // ...
