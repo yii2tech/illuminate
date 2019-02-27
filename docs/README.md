@@ -25,6 +25,7 @@ Getting Started
 Feature Bridges
 ---------------
 
+* [Dependency Injection](bridge-di.md)
 * [Logging](bridge-logging.md)
 * [Caching](bridge-caching.md)
 * [Internationalization](bridge-i18n.md)
