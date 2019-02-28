@@ -26,6 +26,7 @@ Feature Bridges
 ---------------
 
 * [Dependency Injection](bridge-di.md)
+* [HTTP Request](bridge-http-request.md)
 * [Logging](bridge-logging.md)
 * [Caching](bridge-caching.md)
 * [Internationalization](bridge-i18n.md)
