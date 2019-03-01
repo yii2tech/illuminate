@@ -216,11 +216,7 @@ class Session extends \yii\web\Session
     {
         $this->open();
 
-        $value = $this->getIlluminateSession()->get($key);
-
-        $this->getIlluminateSession()->forget($key);
-
-        return $value;
+        return $this->getIlluminateSession()->pull($key);
     }
 
     /**
@@ -416,7 +412,6 @@ class Session extends \yii\web\Session
     public function offsetSet($offset, $item)
     {
         $this->open();
-        $_SESSION[$offset] = $item;
 
         $this->getIlluminateSession()->put($offset, $item);
     }

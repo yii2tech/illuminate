@@ -2,11 +2,11 @@
 
 namespace Yii2tech\Illuminate\Test;
 
-use Illuminate\Container\Container;
-use Illuminate\Support\Facades\Facade;
 use Yii;
 use yii\helpers\ArrayHelper;
+use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Facade;
 
 /**
  * Base class for the test cases.
@@ -119,7 +119,8 @@ class TestCase extends \PHPUnit\Framework\TestCase
     protected function destroyYiiApplication()
     {
         Yii::$app = null;
-        Yii::$app = new \yii\di\Container();
+        Yii::$container = new \yii\di\Container();
+        Yii::setLogger(null);
     }
 
     /**
