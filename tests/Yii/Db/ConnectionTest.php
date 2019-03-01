@@ -1,6 +1,6 @@
 <?php
 
-namespace Yii2tech\Illuminate\Test\DB;
+namespace Yii2tech\Illuminate\Test\Yii\DB;
 
 use Yii;
 use yii\db\Query;
