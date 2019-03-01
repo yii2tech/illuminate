@@ -87,7 +87,7 @@ class Cache extends \yii\caching\Cache
      */
     protected function setValue($key, $value, $duration): bool
     {
-        $this->getIlluminateCache()->put($key, $value, $duration / 60);
+        $this->getIlluminateCache()->put($key, $value, $this->convertDuration($duration));
 
         return true;
     }
@@ -97,7 +97,7 @@ class Cache extends \yii\caching\Cache
      */
     protected function addValue($key, $value, $duration): bool
     {
-        return $this->getIlluminateCache()->add($key, $value, $duration / 60);
+        return $this->getIlluminateCache()->add($key, $value, $this->convertDuration($duration));
     }
 
     /**
@@ -111,8 +111,61 @@ class Cache extends \yii\caching\Cache
     /**
      * {@inheritdoc}
      */
-    protected function flushValues()
+    protected function flushValues(): bool
     {
-        $this->getIlluminateCache()->clear();
+        return $this->getIlluminateCache()->clear();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getValues($keys)
+    {
+        return $this->getIlluminateCache()->getMultiple($keys, false);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setValues($data, $duration): array
+    {
+        $this->getIlluminateCache()->setMultiple($data, $this->convertDuration($duration));
+
+        return [];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function addValues($data, $duration): array
+    {
+        $values = $this->multiGet(array_keys($data));
+
+        $failedKeys = [];
+        $newValues = [];
+
+        foreach ($values as $key => $value) {
+            if ($value !== false) {
+                $failedKeys[] = $key;
+                continue;
+            }
+
+            $newValues[$key] = $data[$key];
+        }
+
+        $this->setValues($newValues, $duration);
+
+        return $failedKeys;
+    }
+
+    /**
+     * Converts cache duration specification from Yii to Laravel.
+     *
+     * @param  float|int|null  $duration cache duration in seconds, zero - means infinite.
+     * @return float|int|null cache duration in minutes, `null` means infinite.
+     */
+    protected function convertDuration($duration)
+    {
+        return $duration == 0 ? null : $duration / 60;
     }
 }
