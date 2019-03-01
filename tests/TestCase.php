@@ -119,6 +119,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
     protected function destroyYiiApplication()
     {
         Yii::$app = null;
+        Yii::$app = new \yii\di\Container();
     }
 
     /**
