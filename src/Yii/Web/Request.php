@@ -13,6 +13,9 @@ use Illuminate\Http\Request as IlluminateRequest;
 /**
  * Request uses Laravel HTTP request as an input source.
  *
+ * This class allows avoiding problems when request handling requires raw body reading.
+ * Also it provides some useful methods from Laravel request, which can be used in Yii.
+ *
  * Application configuration example:
  *
  * ```php
@@ -151,5 +154,33 @@ class Request extends \yii\web\Request
     public function setBodyParams($values)
     {
         $this->_bodyParams = $values;
+    }
+
+    /**
+     * Get all of the input and files for the request.
+     *
+     * @param  array|null  $keys input keys to retrieve, `null` means all input.
+     * @return array input data.
+     */
+    public function all($keys = null): array
+    {
+        return $this->getIlluminateRequest()->all($keys);
+    }
+
+    /**
+     * Runs Laravel validation on request data.
+     * @see \Illuminate\Foundation\Providers\FoundationServiceProvider::registerRequestValidation()
+     * @see \Illuminate\Validation\Factory::validate()
+     *
+     * @param  array  $rules validation rules.
+     * @param  array  $messages error messages.
+     * @param  array  $customAttributes
+     * @return array  validated data.
+     *
+     * @throws \Illuminate\Validation\ValidationException if validation fails.
+     */
+    public function validate(array $rules, array $messages = [], array $customAttributes = []): array
+    {
+        return $this->getIlluminateRequest()->validate($rules, $messages, $customAttributes);
     }
 }

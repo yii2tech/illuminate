@@ -24,7 +24,8 @@
         "illuminate/database": "^5.7",
         "illuminate/cache": "^5.7",
         "illuminate/events": "^5.7",
-        "illuminate/log": "^5.7"
+        "illuminate/log": "^5.7",
+        "illuminate/translation": "^5.7"
     },
     "repositories": [
         {
