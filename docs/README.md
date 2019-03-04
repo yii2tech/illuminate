@@ -30,3 +30,4 @@ Feature Bridges
 * [Logging](bridge-logging.md)
 * [Caching](bridge-caching.md)
 * [Internationalization](bridge-i18n.md)
+* [Mail](bridge-mail.md)
