@@ -72,6 +72,18 @@ class TestCase extends \PHPUnit\Framework\TestCase
     {
         $this->app = new Container();
 
+        $this->app->singleton('config', function () {
+            return new \Illuminate\Config\Repository();
+        });
+
+        $this->app->singleton('hash', function ($app) {
+            return new \Illuminate\Hashing\HashManager($app);
+        });
+
+        $this->app->singleton('hash.driver', function ($app) {
+            return $app['hash']->driver();
+        });
+
         $db = new \Illuminate\Database\Capsule\Manager;
 
         $db->addConnection([

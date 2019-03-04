@@ -13,9 +13,22 @@ use yii\web\IdentityInterface;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 /**
  * User allows usage of the Laravel guard for authenticated user tracking.
+ *
+ * Application configuration example:
+ *
+ * ```php
+ * return [
+ *     'components' => [
+ *         'user' => Yii2tech\Illuminate\Yii\Web\User::class,
+ *         // ...
+ *     ],
+ *     // ...
+ * ];
+ * ```
  *
  * @see \Illuminate\Auth\AuthManager
  *
@@ -132,15 +145,18 @@ class User extends \yii\web\User
         if ($identity instanceof Model) {
             $id = $identity->getKey();
             $attributes = $identity->getAttributes();
+        } elseif ($identity instanceof Authenticatable) {
+            $id = $identity->getAuthIdentifier();
+            $attributes = [];
         } elseif (is_array($identity) && isset($identity['id'])) {
             $id = $identity['id'];
             $attributes = $identity;
         } else {
-            throw new RuntimeException('Unable to convert identity from "'.gettype($identity).'"');
+            throw new RuntimeException('Unable to convert identity from "'.print_r($identity, true).'"');
         }
 
         $identityClass = $this->identityClass;
-        if (is_subclass_of($identityClass, BaseActiveRecord::class)) {
+        if (! empty($attributes) && is_subclass_of($identityClass, BaseActiveRecord::class)) {
             $record = new $identityClass;
             call_user_func([$identityClass, 'populateRecord'], $record, $attributes);
 
