@@ -60,7 +60,7 @@ class Target extends \yii\log\Target
                 }
             }
 
-            $this->getIlluminateLogger()->log($level, $text, $context);
+            $this->getIlluminateLogger()->log($this->convertLogLevel($level), $text, $context);
         }
     }
 }
