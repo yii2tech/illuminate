@@ -18,3 +18,8 @@ method and so on.
 You should be familiar with [Laravel Framework](https://laravel.com/docs) before you start. Make sure you
 understand at least its basic features and concepts, like DI container, Middleware and so on.
 
+# Array Factory
+
+This package uses [illuminatech/array-factory](https://github.com/illuminatech/array-factory) for internal configuration.
+This library provides ability of lazy-style creation of objects from array configuration using syntax and approach similar
+to the one used in Yii. Make sure you have basic understanding of how this library works.

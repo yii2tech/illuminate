@@ -175,5 +175,8 @@ Yii::$app->mailChimp->createNewsletter(/*...*/);
 Yii::$app->subscriptionManager->subscribe(/*...*/);
 ```
 
+> Tip: you can use [illuminatech/array-factory](https://github.com/illuminatech/array-factory), continuing usage of the familiar
+  array syntax configuration for your components.
+
 In case your Yii application defines components via [[\yii\di\Container::$definitions]], code transfer will be even more
 easy for you: you will need simply to move definitions from Yii container to Laravel one.
