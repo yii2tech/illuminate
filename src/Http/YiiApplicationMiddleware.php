@@ -10,6 +10,7 @@ namespace Yii2tech\Illuminate\Http;
 use Yii;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use yii\web\HttpException as YiiHttpException;
 use yii\base\ExitException as YiiExitException;
 use Illuminate\Contracts\Foundation\Application;
@@ -37,6 +38,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  * }
  * ```
  *
+ * @see \Yii2tech\Illuminate\Yii\Web\Response
  * @see DummyResponse
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
@@ -74,7 +76,7 @@ class YiiApplicationMiddleware
         try {
             $this->runYii($entryScript);
 
-            return new DummyResponse();
+            return $this->createResponse();
         } catch (YiiHttpException $e) {
             if ($e->statusCode == 404) {
                 // If Yii indicates page does not exist - pass its resolving to Laravel
@@ -83,8 +85,8 @@ class YiiApplicationMiddleware
 
             throw new HttpException($e->statusCode, $e->getMessage(), $e, [], $e->getCode());
         } catch (YiiExitException $e) {
-            // In case Yii requests application termination - start one
-            return new DummyResponse();
+            // In case Yii requests application termination - request is considered as handled
+            return $this->createResponse();
         }
     }
 
@@ -128,5 +130,30 @@ class YiiApplicationMiddleware
         Yii::setLogger(null);
         Yii::$app = null;
         Yii::$container = null;
+    }
+
+    /**
+     * Creates HTTP response for this middleware.
+     * In case Yii application uses response, which allows its conversion into Laravel one, such conversion will be perfromed.
+     * Otherwise a dummy response will be generated.
+     *
+     * @see \Yii2tech\Illuminate\Yii\Web\Response
+     * @see DummyResponse
+     *
+     * @return Response HTTP response instance.
+     */
+    protected function createResponse(): Response
+    {
+        if (headers_sent()) {
+            return new DummyResponse();
+        }
+
+        $yiiResponse = Yii::$app->get('response');
+
+        if ($yiiResponse instanceof \Yii2tech\Illuminate\Yii\Web\Response) {
+            return $yiiResponse->getIlluminateResponse(true);
+        }
+
+        return new DummyResponse();
     }
 }
