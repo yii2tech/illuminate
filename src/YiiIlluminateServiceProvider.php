@@ -50,9 +50,9 @@ class YiiIlluminateServiceProvider extends ServiceProvider
             return;
         }
 
-        /*$this->publishes([
+        $this->publishes([
             __DIR__ . '/../config/yii.php' => $this->app->make('path.config').DIRECTORY_SEPARATOR.'yii.php',
-        ], 'config');*/
+        ], 'config');
 
         if (! class_exists(\InitialMigration::class)) {
             $timestamp = date('Y_m_d_His', time());
