@@ -131,11 +131,7 @@ class YiiApplicationMiddleware
         $this->bootstrapYii();
 
         try {
-            $this->runYii($entryScript);
-
-            $this->cleanup();
-
-            return $this->createResponse();
+            return $this->runYii($entryScript);
         } catch (YiiHttpException $e) {
             $this->cleanup();
 
@@ -147,8 +143,6 @@ class YiiApplicationMiddleware
             throw new HttpException($e->statusCode, $e->getMessage(), $e, [], $e->getCode());
         } catch (YiiExitException $e) {
             // In case Yii requests application termination - request is considered as handled
-            $this->cleanup();
-
             return $this->createResponse();
         }
     }
@@ -177,9 +171,9 @@ class YiiApplicationMiddleware
      * Runs Yii application from the given entry PHP script.
      *
      * @param  string|null  $entryScript path to Yii application entry script relative to the project base path.
-     * @return mixed Yii entry script run result.
+     * @return \Illuminate\Http\Response HTTP response instance.
      */
-    protected function runYii(?string $entryScript = null)
+    protected function runYii(?string $entryScript = null): Response
     {
         if ($entryScript === null) {
             $entryScript = $this->defaultEntryScript;
@@ -187,7 +181,9 @@ class YiiApplicationMiddleware
 
         $entryScript = $this->app->make('path.base').DIRECTORY_SEPARATOR.$entryScript;
 
-        return require $entryScript;
+        require $entryScript;
+
+        return $this->createResponse();
     }
 
     /**
@@ -217,19 +213,24 @@ class YiiApplicationMiddleware
      * Creates HTTP response for this middleware.
      * In case Yii application uses response, which allows its conversion into Laravel one, such conversion will be perfromed.
      * Otherwise a dummy response will be generated.
+     * This method performs automatic clean up.
      *
      * @see \Yii2tech\Illuminate\Yii\Web\Response
      * @see DummyResponse
      *
-     * @return Response HTTP response instance.
+     * @return \Illuminate\Http\Response HTTP response instance.
      */
     protected function createResponse(): Response
     {
         if (headers_sent()) {
+            $this->cleanup();
+
             return new DummyResponse();
         }
 
-        $yiiResponse = Yii::$app->get('response');
+        $yiiResponse = Yii::$app ? Yii::$app->get('response') : null;
+
+        $this->cleanup();
 
         if ($yiiResponse instanceof \Yii2tech\Illuminate\Yii\Web\Response) {
             return $yiiResponse->getIlluminateResponse(true);
