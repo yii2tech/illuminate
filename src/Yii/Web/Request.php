@@ -7,7 +7,9 @@
 
 namespace Yii2tech\Illuminate\Yii\Web;
 
+use Yii;
 use yii\web\HeaderCollection;
+use yii\base\InvalidConfigException;
 use Illuminate\Http\Request as IlluminateRequest;
 
 /**
@@ -21,7 +23,9 @@ use Illuminate\Http\Request as IlluminateRequest;
  * ```php
  * return [
  *     'components' => [
- *         'request' => Yii2tech\Illuminate\Yii\Web\Request::class,
+ *         'request' => [
+ *             'class' => Yii2tech\Illuminate\Yii\Web\Request::class,
+ *         ],
  *         // ...
  *     ],
  *     // ...
@@ -154,6 +158,48 @@ class Request extends \yii\web\Request
     public function setBodyParams($values)
     {
         $this->_bodyParams = $values;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function loadCookies()
+    {
+        $cookies = [];
+        if ($this->enableCookieValidation) {
+            if ($this->cookieValidationKey == '') {
+                throw new InvalidConfigException(get_class($this) . '::$cookieValidationKey must be configured with a secret key.');
+            }
+            foreach ($this->getIlluminateRequest()->cookies as $name => $value) {
+                if (! is_string($value)) {
+                    continue;
+                }
+                $data = Yii::$app->getSecurity()->validateData($value, $this->cookieValidationKey);
+                if ($data === false) {
+                    continue;
+                }
+                $data = @unserialize($data);
+                if (is_array($data) && isset($data[0], $data[1]) && $data[0] === $name) {
+                    $cookies[$name] = Yii::createObject([
+                        'class' => \yii\web\Cookie::class,
+                        'name' => $name,
+                        'value' => $data[1],
+                        'expire' => null,
+                    ]);
+                }
+            }
+        } else {
+            foreach ($this->getIlluminateRequest()->cookies as $name => $value) {
+                $cookies[$name] = Yii::createObject([
+                    'class' => \yii\web\Cookie::class,
+                    'name' => $name,
+                    'value' => $value,
+                    'expire' => null,
+                ]);
+            }
+        }
+
+        return $cookies;
     }
 
     /**
