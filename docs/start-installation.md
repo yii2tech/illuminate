@@ -231,6 +231,7 @@ These options are:
 
 - [[\yii\base\Application::$vendorPath]] - path to Composer 'vendor' directory.
 - path alias(es) to Yii application root(s), e.g. '@app', '@frontend' and so on.
+- [[\yii\base\Application::$controllerNamespace]] - the namespace that controller classes are located in.
 
 Thus configuration array for Yii application will look like following:
 
@@ -243,6 +244,7 @@ return [
     'aliases' => [
         '@app' => dirname(__DIR__),
     ],
+    'controllerNamespace' => 'legacy\controllers',
     // ...
 ];
 ```
