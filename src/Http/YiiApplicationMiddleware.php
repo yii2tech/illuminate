@@ -115,7 +115,7 @@ class YiiApplicationMiddleware
      */
     public function getFactory(): FactoryContract
     {
-        return $this->app->get(FactoryContract::class);
+        return $this->app->make(FactoryContract::class);
     }
 
     /**

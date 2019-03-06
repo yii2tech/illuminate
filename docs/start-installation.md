@@ -95,7 +95,7 @@ Thus in the end your 'composer.json' file will look like following:
 ```
 
 > Tip: In case you do not want to install assets via Composer in Yii way, dealing with 'asset-packagist.org' or composer
-  asset plugin, you can list asset packages at replace section of your 'composer.json'. For example:
+  asset plugin, you can list asset packages at "replace" section of your 'composer.json'. For example:
 
 ```json
 {
