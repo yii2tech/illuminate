@@ -19,11 +19,6 @@ use Yii2tech\Illuminate\Console\RenameNamespaceCommand;
 class YiiIlluminateServiceProvider extends ServiceProvider
 {
     /**
-     * {@inheritdoc}
-     */
-    protected $defer = false;
-
-    /**
      * Register any application services.
      */
     public function register(): void
