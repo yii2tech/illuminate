@@ -162,10 +162,10 @@ class Cache extends \yii\caching\Cache
      * Converts cache duration specification from Yii to Laravel.
      *
      * @param  float|int|null  $duration cache duration in seconds, zero - means infinite.
-     * @return float|int|null cache duration in minutes, `null` means infinite.
+     * @return float|int|null cache duration in seconds, `null` means infinite.
      */
     protected function convertDuration($duration)
     {
-        return $duration == 0 ? null : $duration / 60;
+        return $duration == 0 ? null : $duration;
     }
 }
