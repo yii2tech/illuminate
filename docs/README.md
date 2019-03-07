@@ -18,6 +18,7 @@ Getting Started
 
 * [What do you need to know](start-prerequisites.md)
 * [Installation](start-installation.md)
+* [Error Handling](start-error-handling.md)
 * [Database](start-database.md)
 * [Session and Authentication](start-session-and-authentication.md)
 

@@ -1,6 +1,9 @@
 Session and Authentication
 ==========================
 
+Session and Web User <span id="session-and-web-user"></span>
+--------------------
+
 One of the main problems running "Two-headed Beast" is having two different HTTP sessions in two different
 web applications. If Laravel starts its own session and Yii starts another one, they will operate different
 session data, which will cause inconsistent behavior while browsing pages rendered by two different frameworks.
@@ -65,3 +68,8 @@ return [
 **Heads up!** Authentication handle tools, provided by this package, will serve you well in "reading" mode,
 but may still create inconsistences in "writing" mode. It is better to migrate all your code related to user
 identity switching (e.g. login, logout, singup and so on) into Laravel application as soon as possible.
+
+
+Password hashing <span id="password-hashing"></span>
+----------------
+
