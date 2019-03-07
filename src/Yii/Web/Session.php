@@ -76,7 +76,7 @@ class Session extends \yii\web\Session
      */
     protected function defaultIlluminateSession(): Store
     {
-        return \Illuminate\Support\Facades\Session::getFacadeRoot();
+        return \Illuminate\Support\Facades\Session::getFacadeRoot()->driver();
     }
 
     /**
