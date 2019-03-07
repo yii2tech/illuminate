@@ -20,6 +20,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * YiiApplicationMiddleware is a middleware, which processing Yii web application.
  *
+ * Kernel configuration example:
+ *
  * ```php
  * namespace App\Http;
  *
@@ -37,6 +39,17 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  *     ];
  *     // ...
  * }
+ * ```
+ *
+ * Route configuration example:
+ *
+ * ```php
+ * Route::any('{fallbackPlaceholder}', function () {
+ *     abort(404);
+ * })
+ *     ->middleware(Yii2tech\Illuminate\Http\YiiApplicationMiddleware::class)
+ *     ->where('fallbackPlaceholder', '.*')
+ *     ->fallback();
  * ```
  *
  * Each middleware instance is automatically configured from the configuration key 'yii.middleware' using [array factory](https://github.com/illuminatech/array-factory).

@@ -21,6 +21,9 @@ return [
 ];
 ```
 
+**Heads up!** usage of this component requires Yii application running within [[\Illuminate\Session\Middleware\StartSession]] middleware.
+Make sure it is running prior to [[\Yii2tech\Illuminate\Http\YiiApplicationMiddleware]] one.
+
 With such configuration session data stored by Laravel will be available in Yii and vice versa.
 However, this is not enough to keep user authentication state. To make it work [[\yii\web\User::$idParam]] should be
 pointed to the same session key Laravel use to store authenticated user ID. You can use following configuration to

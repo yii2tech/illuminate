@@ -148,7 +148,7 @@ Yii Application Middleware <span id="yii-application-middleware"></span>
 
 Yii application will run inside Laravel one as a middleware.
 [[\Yii2tech\Illuminate\Http\YiiApplicationMiddleware]] will serve as such middleware.
-You should add it to your Laravel HTTP kernel class, for example:
+You should can it to your Laravel HTTP kernel class, for example:
 
 ```php
 <?php
@@ -169,6 +169,24 @@ class Kernel extends HttpKernel
     ];
     // ...
 }
+```
+
+As an alternative, you can create a fallback Laravel route, which triggers 404 HTTP error, with this middleware attached.
+For example:
+
+```php
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+// ...
+
+Route::any('{fallbackPlaceholder}', function () {
+    abort(404);
+})
+    ->middleware(Yii2tech\Illuminate\Http\YiiApplicationMiddleware::class)
+    ->where('fallbackPlaceholder', '.*')
+    ->fallback();
 ```
 
 This middleware will Yii application from its originally entry script, which is now, most likely,

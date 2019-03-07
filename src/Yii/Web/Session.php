@@ -29,6 +29,8 @@ use Illuminate\Session\Store;
  * ];
  * ```
  *
+ * > Note: usage of this component requires Yii application running within {@link \Illuminate\Session\Middleware\StartSession} middleware.
+ *
  * @see \Illuminate\Session\Store
  *
  * @property \Illuminate\Session\Store $illuminateSession related Laravel session instance.
