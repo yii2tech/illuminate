@@ -23,7 +23,7 @@ use Illuminate\Http\Response as IlluminateResponse;
  * ```php
  * return [
  *     'components' => [
- *         'request' => Yii2tech\Illuminate\Yii\Web\Response::class,
+ *         'response' => Yii2tech\Illuminate\Yii\Web\Response::class,
  *         // ...
  *     ],
  *     // ...
