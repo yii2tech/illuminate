@@ -40,6 +40,17 @@ use Illuminate\Http\Request as IlluminateRequest;
 class Request extends \yii\web\Request
 {
     /**
+     * {@inheritdoc}
+     */
+    public $csrfParam = '_token';
+
+    /**
+     * @var bool whether to use CSRF generation/validation supplied by Laravel.
+     * If enabled make sure {@link $csrfParam} is set to '_token'.
+     */
+    public $useIlluminateCsrfValildation = false;
+
+    /**
      * @var \Illuminate\Http\Request related Laravel HTTP request.
      */
     private $_illuminateRequest;
@@ -200,6 +211,91 @@ class Request extends \yii\web\Request
         }
 
         return $cookies;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCsrfToken($regenerate = false)
+    {
+        if (! $this->useIlluminateCsrfValildation) {
+            return parent::getCsrfToken($regenerate);
+        }
+
+        if ($regenerate) {
+            return $this->generateCsrfToken();
+        }
+
+        return $this->loadCsrfToken();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function loadCsrfToken()
+    {
+        if (! $this->useIlluminateCsrfValildation) {
+            return parent::loadCsrfToken();
+        }
+
+        return $this->getIlluminateRequest()->session()->token();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function generateCsrfToken()
+    {
+        if (! $this->useIlluminateCsrfValildation) {
+            return parent::generateCsrfToken();
+        }
+
+        $session = $this->getIlluminateRequest()->session();
+        $session->regenerateToken();
+
+        return $session->token();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function validateCsrfToken($clientSuppliedToken = null)
+    {
+        if (! $this->useIlluminateCsrfValildation) {
+            return parent::validateCsrfToken($clientSuppliedToken);
+        }
+
+        $method = $this->getMethod();
+        // only validate CSRF token on non-"safe" methods https://tools.ietf.org/html/rfc2616#section-9.1.1
+        if (!$this->enableCsrfValidation || in_array($method, ['GET', 'HEAD', 'OPTIONS'], true)) {
+            return true;
+        }
+
+        $trueToken = $this->getCsrfToken();
+
+        if ($clientSuppliedToken !== null) {
+            return $this->validateCsrfTokenInternal($clientSuppliedToken, $trueToken);
+        }
+
+        return $this->validateCsrfTokenInternal($this->getBodyParam($this->csrfParam), $trueToken)
+            || $this->validateCsrfTokenInternal($this->getCsrfTokenFromHeader(), $trueToken);
+    }
+
+    /**
+     * Validates CSRF token.
+     * @see \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::tokensMatch()
+     *
+     * @param string $clientSuppliedToken The masked client-supplied token.
+     * @param string $trueToken The masked true token.
+     * @return bool
+     */
+    private function validateCsrfTokenInternal($clientSuppliedToken, $trueToken): bool
+    {
+        if (! is_string($clientSuppliedToken)) {
+            return false;
+        }
+
+        return hash_equals($trueToken, $clientSuppliedToken);
     }
 
     /**
