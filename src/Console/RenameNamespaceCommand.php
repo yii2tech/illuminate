@@ -99,12 +99,12 @@ class RenameNamespaceCommand extends Command
     {
         $content = file_get_contents($file);
 
-        $newContent = preg_replace_callback('/^(namespace\\s+)(\\\\?'.preg_quote($namespaceFrom).')([^\\s]*;)\\s*$/m', function ($matches) use ($namespaceTo) {
-            return $matches[1].$namespaceTo.$matches[3];
+        $newContent = preg_replace_callback('/^(namespace\\s+)(\\\\?'.preg_quote($namespaceFrom).')([^\\s]*;)(\\s*)$/m', function ($matches) use ($namespaceTo) {
+            return $matches[1].$namespaceTo.$matches[3].$matches[4];
         }, $content);
 
-        $newContent = preg_replace_callback('/^(use\\s+)(\\\\?'.preg_quote($namespaceFrom).')([^\\s]*;)\\s*$/m', function ($matches) use ($namespaceTo) {
-            return $matches[1].$namespaceTo.$matches[3];
+        $newContent = preg_replace_callback('/^(use\\s+)(\\\\?'.preg_quote($namespaceFrom).')([^\\s]*;)(\\s*)$/m', function ($matches) use ($namespaceTo) {
+            return $matches[1].$namespaceTo.$matches[3].$matches[4];
         }, $newContent);
 
         if (sha1($content) !== sha1($newContent)) {
