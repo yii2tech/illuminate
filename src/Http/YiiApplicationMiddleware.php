@@ -70,6 +70,11 @@ class YiiApplicationMiddleware
     public $defaultEntryScript = 'legacy/web/index.php';
 
     /**
+     * @var string|null path to bootstrap file, which should be included before defining constants and including `Yii.php`.
+     */
+    public $bootstrap;
+
+    /**
      * @var array|null array configuration for Yii DI container to be applied during Yii bootstrap.
      * If not set - container will not be explicitly setup.
      * @see FactoryContract::make()
@@ -165,7 +170,30 @@ class YiiApplicationMiddleware
      */
     protected function bootstrapYii()
     {
+        if ($this->bootstrap) {
+            require $this->bootstrap;
+        }
+
         defined('YII_ENABLE_ERROR_HANDLER') or define('YII_ENABLE_ERROR_HANDLER', false);
+
+        defined('YII_DEBUG') or define('YII_DEBUG', $this->app->get('config')->get('app.debug', false));
+
+        if (! defined('YII_ENV')) {
+            $environment = $this->app->get('config')->get('app.debug', 'production');
+            switch ($environment) {
+                case 'production':
+                    $environment = 'prod';
+                    break;
+                case 'development':
+                    $environment = 'dev';
+                    break;
+                case 'testing':
+                    $environment = 'test';
+                    break;
+            }
+
+            define('YII_ENV', $environment);
+        }
 
         if (! class_exists('Yii')) {
             require $this->app->make('path.base').'/vendor/yiisoft/yii2/Yii.php';

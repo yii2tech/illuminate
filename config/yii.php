@@ -13,6 +13,7 @@ return [
     'middleware' => [
         'defaultEntryScript' => 'legacy/web/index.php',
         'cleanup' => true,
+        //'bootstrap' => 'config/bootstrap.php',
         /*'container' => [
             '__class' => Yii2tech\Illuminate\Yii\Di\Container::class,
         ],*/
