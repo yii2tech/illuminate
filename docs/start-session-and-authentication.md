@@ -73,3 +73,20 @@ identity switching (e.g. login, logout, singup and so on) into Laravel applicati
 Password hashing <span id="password-hashing"></span>
 ----------------
 
+Luckily for you both Yii and Laravel provides same algorithm for password hashing. In case you have used [[\yii\base\Security::generatePasswordHash()]]
+to hash your user's password and [[\yii\base\Security::validatePassword()]] for its verification, you will be able to use 
+[[\Illuminate\Hashing\BcryptHasher::make()]] and [[\Illuminate\Hashing\BcryptHasher::check()]] correspondingly.
+All you need to do is ensuring correct configuration for hashing in your Laravel application. For example:
+
+```php
+<?php
+// file 'config/hashing.php'
+
+return [
+    'driver' => 'bcrypt',
+    'bcrypt' => [
+        'rounds' => env('BCRYPT_ROUNDS', 13), // should match `yii\base\Security::$passwordHashCost`
+    ],
+    // ...
+];
+```
