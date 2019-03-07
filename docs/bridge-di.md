@@ -56,6 +56,23 @@ var_dump($objectFromLaravel === $objectCreatedByYii); // outputs 'true'
 > Note: you are able to access Laravel DI container anywhere within your Yii application, using [[\Illuminate\Container\Container::getInstance()]].
   However, you are not allowed to use Yii DI container or service locator within Laravel application.
 
+You may configure Yii DI container to be used via "yii.middleware.container" configuration key. If it is set [[\Yii2tech\Illuminate\Http\YiiApplicationMiddleware]]
+will bootstrap it automatically before running Yii application. Laravel configuration example:
+
+```php
+<?php
+// file "config/yii.php"
+
+return [
+    'middleware' => [
+        // ..
+        'container' => [
+            '__class' => Yii2tech\Illuminate\Yii\Di\Container::class,
+        ],
+    ],
+];
+```
+
 
 Yii Components Transfer <span id="di-container-bridge"></span>
 -----------------------

@@ -217,6 +217,26 @@ class Kernel extends HttpKernel
 }
 ```
 
+You may adjust middleware settings using laravel configuration key "yii.middleware". Configuration file for can be created
+using following console command:
+
+```
+php artisan vendor:publish --provider="Yii2tech\Illuminate\YiiIlluminateServiceProvider" --tag=config
+```
+
+This will create file "config/yii.php" will following content:
+
+```php
+<?php
+
+return [
+    'middleware' => [
+        'defaultEntryScript' => 'legacy/web/index.php',
+        // ...
+    ],
+];
+```
+
 > Note: if you need to use custom `Yii` class, you should specify path to it via Composer "classmap".
 
 **Heads up!** Make sure you do not specify routes, which catch all HTTP requests in your Yii URL Manager.
@@ -243,6 +263,8 @@ return [
     'vendorPath' => realpath(__DIR__.'/../../vendor'),
     'aliases' => [
         '@app' => dirname(__DIR__),
+        '@legacy' => dirname(__DIR__),
+        // ...
     ],
     'controllerNamespace' => 'legacy\controllers',
     // ...
@@ -263,6 +285,8 @@ To check up Laravel URL handling is working you can create a test route at 'rout
 
 ```php
 <?php
+
+use Illuminate\Support\Facades\Route;
 
 Route::get('test-laravel', function () {
     return view('welcome');
