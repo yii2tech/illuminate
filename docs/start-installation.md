@@ -55,7 +55,7 @@ Composer setup <span id="composer-setup"></span>
 --------------
 
 You will need to compose new 'composer.json' file, which will include both the requirements from your Yii project and
-the ones []demanded by Laravel](https://github.com/laravel/laravel/blob/master/composer.json).
+the ones [demanded by Laravel](https://github.com/laravel/laravel/blob/master/composer.json).
 Also, obviously, you will need to add this package to requirements section as well.
 Thus in the end your 'composer.json' file will look like following:
 
@@ -189,7 +189,7 @@ Route::any('{fallbackPlaceholder}', function () {
     ->fallback();
 ```
 
-This middleware will Yii application from its originally entry script, which is now, most likely,
+This middleware will run Yii application from its originally entry script, which is now, most likely,
 located at 'legacy/web/index.php'. The common content of such file is following:
 
 ```php
@@ -259,6 +259,10 @@ return [
 
 **Heads up!** Make sure you do not specify routes, which catch all HTTP requests in your Yii URL Manager.
 Middleware will path request resolving to Laravel only if Yii application ends with 404 `HttpException`.
+
+[[\Yii2tech\Illuminate\Http\YiiApplicationMiddleware]] automatically defines `YII_DEBUG` and `YII_ENV` constants from
+corresponding Laravel configuration, thus setting them at Yii entry script or config file will cause no effect or an error.
+You can use [[\Yii2tech\Illuminate\Http\YiiApplicationMiddleware::$bootstrap]] in case you need to define Yii constants manually.
 
 
 Yii Application Configuration <span id="yii-application-configuration"></span>

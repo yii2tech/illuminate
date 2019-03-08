@@ -2,7 +2,7 @@ Caching
 =======
 
 Having two different cache storages defined by Yii and Laravel causes similar problems described for database connection.
-You will have to duplicate configuration for cache components, extra connections to cache serves may appear and so on.
+You will have to duplicate configuration for cache components, extra connections to cache servers may appear and so on.
 This package provides [[\Yii2tech\Illuminate\Yii\Caching\Cache]] component for Yii to avoid such problems. This cache
 component uses Laravel cache repository as storage, transferring all cache operations throw it.
 
