@@ -27,9 +27,11 @@ class RenameNamespaceCommandTest extends TestCase
 
         $this->assertFalse(strpos($fileContent, 'namespace yii'));
         $this->assertFalse(strpos($fileContent, 'use yii'));
+        $this->assertTrue(preg_match('/yii[^\\s]+::class/m', $fileContent) === 0);
 
         $this->assertTrue(strpos($fileContent, 'namespace legacy') > 0);
         $this->assertTrue(strpos($fileContent, 'use legacy') > 0);
+        $this->assertTrue(preg_match('/legacy[^\\s]+::class/m', $fileContent) > 0);
     }
 
     /**
