@@ -111,6 +111,10 @@ class RenameNamespaceCommand extends Command
             return $matches[1].$namespaceTo.$matches[3];
         }, $newContent);
 
+        $newContent = preg_replace_callback('/(@see \\\\?)('.preg_quote($namespaceFrom).')(\\\\[^\\s]+\\s+)/m', function ($matches) use ($namespaceTo) {
+            return $matches[1].$namespaceTo.$matches[3];
+        }, $newContent);
+
         if (sha1($content) !== sha1($newContent)) {
             file_put_contents($file, $newContent);
 
