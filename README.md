@@ -57,7 +57,7 @@ Laravel is most popular PHP framework with solid commercial background and large
 good foundation for your project in the long term.
 
 **Heads up!** Whether to switch from one technology to another or not - is **your own** choice. You take the responsibility
-for this decision and you will have to deal with it consequences. Do not blame anyone else for the troubles and obstacles
+for this decision, and you will have to deal with it consequences. Do not blame anyone else for the troubles and obstacles
 you will have to face on the chosen path.
 
 
@@ -75,6 +75,6 @@ URL routes handling (e.g. controllers) from Yii2 to Laravel.
 
 **Heads up!** This package provides tools and libraries helping project migration, however, do not expect it somehow
 magically do all the job for you. The package helps solving basic problems and supports the quick start for the process,
-but most toil will lay on your shoulders. Be ready for it.
+but most of the toil will lay on your shoulders. Be ready for it.
 
 Documentation is at [docs/README.md](https://github.com/yii2tech/illuminate/blob/master/docs/README.md).

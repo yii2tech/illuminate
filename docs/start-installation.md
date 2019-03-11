@@ -1,7 +1,7 @@
 Installation
 ============
 
-First of all create a new branch in your version control system fto hold the project migration.
+First of all create a new branch in your version control system to hold the project migration.
 Do not merge this branch into current development one, until you ensure created "Two-headed Beast" works fine for you.
 
 
