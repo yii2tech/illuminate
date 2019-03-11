@@ -69,6 +69,10 @@ return [
 but may still create inconsistences in "writing" mode. It is better to migrate all your code related to user
 identity switching (e.g. login, logout, singup and so on) into Laravel application as soon as possible.
 
+Keep in mind that you might need to adjust Laravel "auth.providers" configuration to match your legacy database. For example,
+table, which store identity records, most likely called "user" (in singular form), while Laravel uses name "users" (in plural), 
+you probably store hashed password inside field "password_hash", while Laravel uses simply "password" and so on.
+
 
 Password hashing <span id="password-hashing"></span>
 ----------------
