@@ -1,23 +1,23 @@
-How to convince project owner
-=============================
+How to convince the project owner
+=================================
 
 It is always hard to persuade project owner or project holder tp start project migration from one framework to another.
 From the business perspective this is high resource consuming task, which does not provide any immediate outcome: application
 will not receive any new features and thus will not earn eny more money.
 
-There is no universal way to convince project owner that framework migration is necessary. However, there are some arguments,
+There is no universal way to convince project owner, that framework migration is necessary. However, there are some arguments,
 which may help you:
 
 * In case project based on outdated technology, it might be hard to add some modern feature to it. World does not stand
-  still some new features and trends may appear any time and business may want to utilize them. Having up-to-date modern
+  still: some new features and trends may appear any time, and business may want to utilize them. Having up-to-date modern
   framework ensures this will be easy.
 
 * Using more powerful framework will reduce the time needed for new feature implementation, which will save money for
   the business in long term.
 
 * Using of outdated technology for too long may cause project to be impossible to run on modern computers. Operation systems,
-  utilities and PHP itself continue to evolve sometimes causing backward compatibility break changes. Without an update
-  it is just the matter of time when the project will be unable to function on modern systems. For example: PHP frameworks
+  utilities and PHP itself continue to evolve, sometimes causing backward compatibility break changes. Without an update
+  it is just the matter of time, when the project will be unable to function on modern systems. For example: PHP frameworks
   written 8-10 years ago are unable to function with PHP 7, which was a breakthrough in terms of performance.
 
 * It is always hard to hire new people to development team working with old technology. People do not study frameworks,
@@ -35,6 +35,10 @@ It may also happen you will be unable to persuade project owner. In this case co
 After all, you are the one, who will benefit from the result. It may make sense for you to spend extra time for the process
 to save more in the future.
 
+One way or another, the project migration is nearly impossible to be complete in the scope of the single development sprint.
+Most likely, this process will spread over several months, during which you should periodically reserve some time for it.
+The project may continue to evolve and receive new features, while framework migration task will be performed in parallel.
+
 If you started the project migration, and project owner ask you to implement new feature, you should always answer with
-something like this: "Normally this would take X days, but since we using new framework now it cost us just X-Y days".
-Such tactics will simplify further negotiations about finalizing migration process for you.
+something like this: "Normally this would take X days, but since we using new framework now, it cost us just a portion
+of this time". Such tactics will simplify further negotiations about finalizing migration process for you.

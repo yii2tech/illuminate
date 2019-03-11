@@ -32,10 +32,11 @@ Feature Bridges
 * [Caching](bridge-caching.md)
 * [Internationalization](bridge-i18n.md)
 * [Mail](bridge-mail.md)
+* [Blade Templates](bridge-blade.md)
 
 
 Strategy Tips and Advices
 -------------------------
 
-* [How to convince project owner](strategy-convince-project-owner.md)
+* [How to convince the project owner](strategy-convince-project-owner.md)
 * [Overall strategy](strategy-overall.md)
