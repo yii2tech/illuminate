@@ -19,4 +19,4 @@ install:
   - travis_retry composer require "phpunit/phpunit:^6.0|^7.0" --update-with-dependencies
 
 script:
-  - phpunit $PHPUNIT_FLAGS
+  - vendor/bin/phpunit $PHPUNIT_FLAGS
