@@ -6,7 +6,7 @@ DI Container Bridge <span id="di-container-bridge"></span>
 
 Both Laravel and Yii provide dependency injection container in more or less similar way.
 Container stores bindings (definitions) for classes and interfaces, which can be resolved by demand.
-This package provides [[\Yii2tech\Illuminate\Yii\Di\Container]] as a replacement for standard Yii container.
+This package provides `\Yii2tech\Illuminate\Yii\Di\Container` as a replacement for the standard Yii container.
 It connects Yii container with the Laravel one, allowing resolve of any binding defined at Laravel within Yii.
 Container can be setup at application entry script. For example:
 
@@ -53,10 +53,10 @@ $objectCreatedByYii = Yii::createObject(\HelpSpot\API::class);
 var_dump($objectFromLaravel === $objectCreatedByYii); // outputs 'true'
 ```
 
-> Note: you are able to access Laravel DI container anywhere within your Yii application, using [[\Illuminate\Container\Container::getInstance()]].
+> Note: you are able to access Laravel DI container anywhere within your Yii application, using `\Illuminate\Container\Container::getInstance()`.
   However, you are not allowed to use Yii DI container or service locator within Laravel application.
 
-You may configure Yii DI container to be used via "yii.middleware.container" configuration key. If it is set [[\Yii2tech\Illuminate\Http\YiiApplicationMiddleware]]
+You may configure Yii DI container to be used via "yii.middleware.container" configuration key. If it is set, `\Yii2tech\Illuminate\Http\YiiApplicationMiddleware`
 will bootstrap it automatically before running Yii application. Laravel configuration example:
 
 ```php
@@ -101,9 +101,9 @@ return [
 ```
 
 In order to make "Two-headed Beast" configuration more consistent, you should move all your custom Yii components to Laravel.
-Usage of [[\Yii2tech\Illuminate\Yii\Di\Container]] makes it easy enough. First of all move the component class file from
+Usage of `\Yii2tech\Illuminate\Yii\Di\Container` makes it easy enough. First of all, move the component class file from
 "legacy" directory to somewhere withing "App" namespace, for example to the "Services" directory, updating namespace accordingly.
-At this stage you should also consider removing [[\yii\base\Component]] inheritance, if it present. Thus your new Laravel
+At this stage you should also consider removing `\yii\base\Component` inheritance, if it present. Thus your new Laravel
 service may look like following:
 
 ```php
@@ -130,7 +130,7 @@ class SubscriptionManager
 }
 ```
 
-Next you need to create bindings for this components within Laravel DI container. Those can be put into a service provider.
+Next you need to create bindings for these components within Laravel DI container. Those can be put into a service provider.
 For example:
 
 ```php
@@ -193,7 +193,7 @@ Yii::$app->subscriptionManager->subscribe(/*...*/);
 ```
 
 > Tip: you can use [illuminatech/array-factory](https://github.com/illuminatech/array-factory), continuing usage of the familiar
-  array syntax configuration for your components.
+  array syntax configuration for your components in Laravel.
 
-In case your Yii application defines components via [[\yii\di\Container::$definitions]], code transfer will be even more
+In case your Yii application defines components via `\yii\di\Container::$definitions`, code transfer will be even more
 easy for you: you will need simply to move definitions from Yii container to Laravel one.

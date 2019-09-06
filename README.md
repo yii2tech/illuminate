@@ -77,4 +77,4 @@ URL routes handling (e.g. controllers) from Yii2 to Laravel.
 magically do all the job for you. The package helps solving basic problems and supports the quick start for the process,
 but most of the toil will lay on your shoulders. Be ready for it.
 
-Documentation is at [docs/README.md](https://github.com/yii2tech/illuminate/blob/master/docs/README.md).
+Documentation is at [docs/README.md](docs/README.md).

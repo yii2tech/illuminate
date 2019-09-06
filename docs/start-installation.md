@@ -1,15 +1,15 @@
 Installation
 ============
 
-First of all create a new branch in your version control system to hold the project migration.
+First of all, create a new branch in your version control system to hold the project migration.
 Do not merge this branch into current development one, until you ensure created "Two-headed Beast" works fine for you.
 
 
 Project structure <span id="project-structure"></span>
 -----------------
 
-Move all your existing project files under new directory called "legacy". You should move there all PHP files and
-even a "webroot" folder. Only 'composer.json', 'vendor', docs and service files like '.gitignore' can be left at the
+Move all your existing project files under the new directory called "legacy". You should move all PHP files and even a
+"webroot" folder there. Only 'composer.json', 'vendor', docs and service files like '.gitignore' can be left at the
 project root.
 
 Next you will need to fill the project root with Laravel application.
@@ -64,14 +64,14 @@ Thus in the end your 'composer.json' file will look like following:
     "name": "my/project",
     ...
     "require": {
-        "php": "^7.1.3",
+        "php": "^7.2",
         "fideloper/proxy": "^4.0",
-        "laravel/framework": "5.8.*",
+        "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
         "yiisoft/yii2": "~2.0.14",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
-        "yii2tech/illuminate": "~1.0.0",
+        "yii2tech/illuminate": "~1.1.0",
         ...
     },
     "autoload": {
@@ -116,10 +116,10 @@ Legacy Namespace renaming <span id="legacy-namespace-renaming"></span>
 
 Most likely you were using "app" as a root namespace at your Yii project. Laravel uses "App" for the same purpose.
 While technically those two are different, it is better to make them more contrast, especially if you run your project
-on Windows. It is recommended to rename "app" namespace of old Yii project to something different like "legacy", e.g.
-full class name like `app\models\User` will become `legacy\models\User`. Such naming will serve you well in the future:
-whenever you see 'legacy' in class name indicates the part of the code, which need to be rewritten.
-You can perform namespace renaming manually or using your preferable tool like IDE refactor helper.
+on OS with case-insensitive filesystem, like Windows. It is recommended to rename "app" namespace of the old Yii project to
+something different like "legacy", e.g. full class name like `app\models\User` will become `legacy\models\User`.
+Such naming will serve you well in the future: whenever you see "legacy" in class name indicates the part of the code,
+which need to be rewritten. You can perform namespace renaming manually or using your preferable tool like IDE refactor helper.
 However, you can use console command provided by this extension for the same purpose:
 
 ```
@@ -147,8 +147,8 @@ Yii Application Middleware <span id="yii-application-middleware"></span>
 --------------------------
 
 Yii application will run inside Laravel one as a middleware.
-[[\Yii2tech\Illuminate\Http\YiiApplicationMiddleware]] will serve as such middleware.
-You should can it to your Laravel HTTP kernel class, for example:
+`\Yii2tech\Illuminate\Http\YiiApplicationMiddleware` will serve as such middleware.
+You should add it to your Laravel HTTP kernel class, for example:
 
 ```php
 <?php
@@ -203,9 +203,9 @@ $config = require(__DIR__ . '/../config/web.php');
 (new yii\web\Application($config))->run();
 ```
 
-You do not need to change any logic inside it, however, requirements of 'vendor/autoload.php' and
-'Yii.php' are redundant here and will cause an error if they will remain. So adjusted entry script
-will look like following:
+You do not need to change any logic inside of it, however, requirements of "vendor/autoload.php" and
+"Yii.php" are redundant here and will cause an error, if they will remain. So adjusted entry script
+should look like following:
 
 ```php
 <?php
@@ -215,7 +215,7 @@ $config = require(__DIR__ . '/../config/web.php');
 (new yii\web\Application($config))->run();
 ```
 
-Path 'legacy/web/index.php' is used by [[\Yii2tech\Illuminate\Http\YiiApplicationMiddleware]] by default. In case
+Path "legacy/web/index.php" is used by `\Yii2tech\Illuminate\Http\YiiApplicationMiddleware` by default. In case
 you need to change it, you should specify your own value as a middleware argument. For example:
 
 ```php
@@ -258,11 +258,11 @@ return [
 > Note: if you need to use custom `Yii` class, you should specify path to it via Composer "classmap".
 
 **Heads up!** Make sure you do not specify routes, which catch all HTTP requests in your Yii URL Manager.
-Middleware will path request resolving to Laravel only if Yii application ends with 404 `HttpException`.
+Middleware will path request resolving to Laravel only, if Yii application ends up with 404 `HttpException`.
 
-[[\Yii2tech\Illuminate\Http\YiiApplicationMiddleware]] automatically defines `YII_DEBUG` and `YII_ENV` constants from
-corresponding Laravel configuration, thus setting them at Yii entry script or config file will cause no effect or an error.
-You can use [[\Yii2tech\Illuminate\Http\YiiApplicationMiddleware::$bootstrap]] in case you need to define Yii constants manually.
+`\Yii2tech\Illuminate\Http\YiiApplicationMiddleware` automatically defines `YII_DEBUG` and `YII_ENV` constants from
+corresponding Laravel configuration, thus setting them at the Yii entry script or config file will cause no effect or an error.
+You can use `\Yii2tech\Illuminate\Http\YiiApplicationMiddleware::$bootstrap` in case you need to define Yii constants manually.
 
 
 Yii Application Configuration <span id="yii-application-configuration"></span>
@@ -271,11 +271,11 @@ Yii Application Configuration <span id="yii-application-configuration"></span>
 There are several options, which have to be adjusted at Yii application configuration array.
 These options are:
 
-- [[\yii\base\Application::$vendorPath]] - path to Composer 'vendor' directory.
-- path alias(es) to Yii application root(s), e.g. '@app', '@frontend' and so on.
-- [[\yii\base\Application::$controllerNamespace]] - the namespace that controller classes are located in.
+- `\yii\base\Application::$vendorPath` - path to Composer 'vendor' directory.
+- path alias(es) to Yii application root(s), e.g. "@app", "@frontend" and so on.
+- `\yii\base\Application::$controllerNamespace` - the namespace, which controller classes are located in.
 
-Thus configuration array for Yii application will look like following:
+Thus configuration array for Yii application should look like following:
 
 ```php
 <?php
@@ -293,17 +293,17 @@ return [
 ];
 ```
 
-You may also need to replace standard Yii components with the one provided by this extension, creating
+You may also need to replace standard Yii components with the ones provided by this extension, creating
 proper bridges between Yii and Laravel. Those components are described at other sections of this documentation.
 
 
 Verifying Results <span id="verifying-results"></span>
 -----------------
 
-Once all steps listed above is done, you should receive working HTTP application, where all your former
-URLs are responding as they were. E.g. if you type 'https://my-project.test/login' in browser, you should
+Once all steps listed above are done, you should receive working HTTP application, where all your former
+URLs are responding as they were. E.g. if you type "https://my-project.test/login" in browser, you should
 be able to see your login form as it was before.
-To check up Laravel URL handling is working you can create a test route at 'routes/web.php', like following:
+To check up Laravel URL handling is working you can create a test route at "routes/web.php", like following:
 
 ```php
 <?php
@@ -315,4 +315,4 @@ Route::get('test-laravel', function () {
 });
 ```
 
-Now, if you type 'https://my-project.test/test-laravel' in browser, you should be able to see Laravel welcome page.
+Now, if you type "https://my-project.test/test-laravel" in browser, you should be able to see Laravel welcome page.
