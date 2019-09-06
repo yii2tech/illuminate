@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/yii2tech
- * @copyright Copyright (c) 2015 Yii2tech
+ * @copyright Copyright (c) 2019 Yii2tech
  * @license [New BSD License](http://www.opensource.org/licenses/bsd-license.php)
  */
 
@@ -46,7 +46,7 @@ class Request extends \yii\web\Request
 
     /**
      * @var bool whether to use CSRF generation/validation supplied by Laravel.
-     * If enabled make sure {@link $csrfParam} is set to '_token'.
+     * If enabled make sure {@see $csrfParam} is set to '_token'.
      */
     public $useIlluminateCsrfValildation = false;
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/yii2tech
- * @copyright Copyright (c) 2015 Yii2tech
+ * @copyright Copyright (c) 2019 Yii2tech
  * @license [New BSD License](http://www.opensource.org/licenses/bsd-license.php)
  */
 
@@ -228,7 +228,7 @@ class YiiApplicationMiddleware
     }
 
     /**
-     * Performs clean up after running Yii application in case {@link $cleanup} is enabled.
+     * Performs clean up after running Yii application in case {@see $cleanup} is enabled.
      */
     protected function cleanup()
     {

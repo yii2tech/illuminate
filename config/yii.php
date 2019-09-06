@@ -1,6 +1,7 @@
 <?php
 /**
  * Configuration for Yii2 to Laravel Migration Package.
+ * @see https://github.com/yii2tech/illuminate
  */
 
 return [

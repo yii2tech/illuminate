@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/yii2tech
- * @copyright Copyright (c) 2015 Yii2tech
+ * @copyright Copyright (c) 2019 Yii2tech
  * @license [New BSD License](http://www.opensource.org/licenses/bsd-license.php)
  */
 
@@ -83,7 +83,7 @@ class Response extends \yii\web\Response
     }
 
     /**
-     * Creates default {@link $illuminateResponse} instance.
+     * Creates default {@see $illuminateResponse} instance.
      *
      * @return \Illuminate\Http\Response Laravel response instance.
      */

@@ -1,14 +1,14 @@
 <?php
 /**
  * @link https://github.com/yii2tech
- * @copyright Copyright (c) 2015 Yii2tech
+ * @copyright Copyright (c) 2019 Yii2tech
  * @license [New BSD License](http://www.opensource.org/licenses/bsd-license.php)
  */
 
 namespace Yii2tech\Illuminate\Yii\Mail;
 
 /**
- * SwiftMailer is an advanced version of {@link \yii\swiftmailer\Mailer}, which allows sharing mailer/transport instance with Laravel mailer.
+ * SwiftMailer is an advanced version of {@see \yii\swiftmailer\Mailer}, which allows sharing mailer/transport instance with Laravel mailer.
  *
  * Usage of this component allows you having single configuration for the mail transport throughout entire project.
  *

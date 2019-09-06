@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/yii2tech
- * @copyright Copyright (c) 2015 Yii2tech
+ * @copyright Copyright (c) 2019 Yii2tech
  * @license [New BSD License](http://www.opensource.org/licenses/bsd-license.php)
  */
 
@@ -13,7 +13,7 @@ use Illuminate\Translation\Translator;
 /**
  * I18n allows message translation directly through Laravel translator.
  *
- * Categories, which translations should be passed to Laravel, are determined via {@link $illuminateCategories}.
+ * Categories, which translations should be passed to Laravel, are determined via {@see $illuminateCategories}.
  * Actual translation key will be composed by concatenation of category, dot symbol ('.') and message.
  * E.g. Yii translation call `Yii::t('category', 'message')` equals to `__('category.message')`.
  *
@@ -47,7 +47,7 @@ use Illuminate\Translation\Translator;
 class I18n extends \yii\i18n\I18N
 {
     /**
-     * @var string[] list of translation categories, which should be passed to {@link $illuminateTranslator}.
+     * @var string[] list of translation categories, which should be passed to {@see $illuminateTranslator}.
      * Messages from these categories will be translated directly via Laravel translator without involving Yii.
      * Translation message key will be composed by concatenation of category, dot symbol ('.') and message.
      */
@@ -115,7 +115,7 @@ class I18n extends \yii\i18n\I18N
 
     /**
      * Make the Laravel-like place-holder replacements on a translated message.
-     * It replaces placeholders, marked by ':', which are not processed with original {@link format()} method.
+     * It replaces placeholders, marked by ':', which are not processed with original {@see format()} method.
      *
      * @param  string  $message raw message.
      * @param  array  $params the parameters that will be used for the replacement.

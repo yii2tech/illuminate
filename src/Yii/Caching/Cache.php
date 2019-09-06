@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/yii2tech
- * @copyright Copyright (c) 2015 Yii2tech
+ * @copyright Copyright (c) 2019 Yii2tech
  * @license [New BSD License](http://www.opensource.org/licenses/bsd-license.php)
  */
 
@@ -29,7 +29,7 @@ use Illuminate\Contracts\Cache\Repository;
  *
  * > Note: by default this component will not allow you to share particular cache keys between Yii and Laravel,
  *   since Yii uses special prefix for the cache keys and stores data in serialized state. If you wish to share same
- *   cache key you should disable {@link \yii\caching\Cache::$keyPrefix} and {@link \yii\caching\Cache::$serializer}.
+ *   cache key you should disable {@see \yii\caching\Cache::$keyPrefix} and {@see \yii\caching\Cache::$serializer}.
  *
  * @see \yii\caching\Cache::$keyPrefix
  * @see \yii\caching\Cache::$serializer
