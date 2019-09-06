@@ -95,7 +95,7 @@ class I18n extends \yii\i18n\I18N
     public function translate($category, $message, $params, $language): string
     {
         if (in_array($category, $this->illuminateCategories, true)) {
-            return $this->getIlluminateTranslator()->getFromJson($category.'.'.$message, $params, $language);
+            return $this->getIlluminateTranslator()->get($category.'.'.$message, $params, $language);
         }
 
         return parent::translate($category, $message, $params, $language);
