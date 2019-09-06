@@ -184,6 +184,7 @@ class YiiApplicationMiddleware
                 case 'production':
                     $environment = 'prod';
                     break;
+                case 'local':
                 case 'development':
                     $environment = 'dev';
                     break;
