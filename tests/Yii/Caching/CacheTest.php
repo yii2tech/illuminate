@@ -41,4 +41,13 @@ class CacheTest extends TestCase
         $this->assertSame(['key1'], $cache->multiAdd(['key1' => 'value1', 'key3' => 'value3']));
         $this->assertSame('value3', $cache->get('key3'));
     }
+
+    public function testGetDefaultIlluminateCache()
+    {
+        $this->app->instance('cache', new Repository(new ArrayStore()));
+
+        $cache = new Cache();
+
+        $this->assertSame($this->app->make('cache'), $cache->getIlluminateCache());
+    }
 }

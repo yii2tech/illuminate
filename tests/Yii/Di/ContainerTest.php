@@ -42,4 +42,11 @@ class ContainerTest extends TestCase
         });
         $this->assertTrue(Yii::$container->has(stdClass::class));
     }
+
+    public function testGetDefaultIlluminateContainer()
+    {
+        $container = new Container();
+
+        $this->assertSame($this->app, $container->getIlluminateContainer());
+    }
 }

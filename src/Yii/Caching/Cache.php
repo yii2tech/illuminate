@@ -52,6 +52,10 @@ class Cache extends \yii\caching\Cache
      */
     public function getIlluminateCache(): Repository
     {
+        if ($this->_illuminateCache === null) {
+            $this->_illuminateCache = $this->defaultIlluminateCache();
+        }
+
         return $this->_illuminateCache;
     }
 

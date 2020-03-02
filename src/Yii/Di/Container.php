@@ -45,6 +45,10 @@ class Container extends \yii\di\Container
      */
     public function getIlluminateContainer(): ContainerContract
     {
+        if ($this->_illuminateContainer === null) {
+            $this->_illuminateContainer = $this->defaultIlluminateContainer();
+        }
+
         return $this->_illuminateContainer;
     }
 
