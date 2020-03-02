@@ -73,7 +73,7 @@ class Response extends \yii\web\Response
 
     /**
      * @param  \Illuminate\Http\Response|null  $illuminateResponse
-     * @return self reference.
+     * @return static reference.
      */
     public function setIlluminateResponse(?IlluminateResponse $illuminateResponse): self
     {

@@ -258,7 +258,7 @@ return [
 > Note: if you need to use custom `Yii` class, you should specify path to it via Composer "classmap".
 
 **Heads up!** Make sure you do not specify routes, which catch all HTTP requests in your Yii URL Manager.
-Middleware will path request resolving to Laravel only, if Yii application ends up with 404 `HttpException`.
+Middleware will pass request resolving to Laravel only, if Yii application ends up with 404 `HttpException`.
 
 `\Yii2tech\Illuminate\Http\YiiApplicationMiddleware` automatically defines `YII_DEBUG` and `YII_ENV` constants from
 corresponding Laravel configuration, thus setting them at the Yii entry script or config file will cause no effect or an error.
@@ -316,3 +316,41 @@ Route::get('test-laravel', function () {
 ```
 
 Now, if you type "https://my-project.test/test-laravel" in browser, you should be able to see Laravel welcome page.
+
+
+Resolving several Yii applications <span id="resolving-several-yii-applications"></span>
+----------------------------------
+
+In case your original Yii project has several web application entry points, serving different subdomains, like [Yii 2.0 Advanced Application Template](https://github.com/yiisoft/yii2-app-advanced)
+does, you will need to register multiple route fallbacks with `\Yii2tech\Illuminate\Http\YiiApplicationMiddleware` attached.
+One - per each sub-domain you use. See [Laravel subdomain routing](https://laravel.com/docs/routing#route-group-subdomain-routing) for more details.
+The result Laravel routes may look like following:
+
+```php
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+//...
+
+Route::domain('frontend.my-project.test')->any('{fallbackPlaceholder}', function () {
+    abort(404);
+})
+    ->middleware(Yii2tech\Illuminate\Http\YiiApplicationMiddleware::class.':legacy/frontend/web/index.php')
+    ->where('fallbackPlaceholder', '.*')
+    ->fallback();
+
+Route::domain('backend.my-project.test')->any('{fallbackPlaceholder}', function () {
+    abort(404);
+})
+    ->middleware(Yii2tech\Illuminate\Http\YiiApplicationMiddleware::class.':legacy/backend/web/index.php')
+    ->where('fallbackPlaceholder', '.*')
+    ->fallback();
+
+Route::domain('api.my-project.test')->any('{fallbackPlaceholder}', function () {
+    abort(404);
+})
+    ->middleware(Yii2tech\Illuminate\Http\YiiApplicationMiddleware::class.':legacy/api/web/index.php')
+    ->where('fallbackPlaceholder', '.*')
+    ->fallback();
+```
