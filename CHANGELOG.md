@@ -1,8 +1,8 @@
 Yii2 to Laravel Migration Package Change Log
 ============================================
 
-1.1.1 Under Development
------------------------
+1.1.1, March 4, 2020
+--------------------
 
 - Bug #3: Fixed `Yii2tech\Illuminate\Yii\Di\Container` and `Yii2tech\Illuminate\Yii\Caching\Cache` unable to pick up default related Illuminate object (klimov-paul)
 - Enh: Added support for "illuminate/*" 7.0 (klimov-paul)
