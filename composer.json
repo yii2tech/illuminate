@@ -16,20 +16,20 @@
     ],
     "require": {
         "yiisoft/yii2": "~2.0.14",
-        "illuminate/console": "^6.0",
-        "illuminate/http": "^6.0",
-        "illuminatech/array-factory": "^1.2.0"
+        "illuminate/console": "^6.0 || ^7.0",
+        "illuminate/http": "^6.0 || ^7.0",
+        "illuminatech/array-factory": "^1.2.1"
     },
     "require-dev": {
-        "illuminate/auth": "^6.0",
-        "illuminate/cache": "^6.0",
-        "illuminate/config": "^6.0",
-        "illuminate/database": "^6.0",
-        "illuminate/events": "^6.0",
-        "illuminate/hashing": "^6.0",
-        "illuminate/log": "^6.0",
-        "illuminate/translation": "^6.0",
-        "phpunit/phpunit": "^7.5|^8.0"
+        "illuminate/auth": "*",
+        "illuminate/cache": "*",
+        "illuminate/config": "*",
+        "illuminate/database": "*",
+        "illuminate/events": "*",
+        "illuminate/hashing": "*",
+        "illuminate/log": "*",
+        "illuminate/translation": "*",
+        "phpunit/phpunit": "^7.5 || ^8.0"
     },
     "repositories": [
         {

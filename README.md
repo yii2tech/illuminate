@@ -65,7 +65,7 @@ Usage
 -----
 
 Migration of existing project from one PHP framework to another can not be done by single day. Most likely you have spent
-several months or even years to create your current codebase, and its update will also take much time. 
+several months or even years creating your current codebase, and its update will also take much time. 
 
 This extension allows running Yii2 and Laravel applications simultaneously at the same project, allowing resolving of
 incoming HTTP requests by one of these applications depending on, which one has a matching route defined for it. 

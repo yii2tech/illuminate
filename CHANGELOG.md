@@ -5,6 +5,7 @@ Yii2 to Laravel Migration Package Change Log
 -----------------------
 
 - Bug #3: Fixed `Yii2tech\Illuminate\Yii\Di\Container` and `Yii2tech\Illuminate\Yii\Caching\Cache` unable to pick up default related Illuminate object (klimov-paul)
+- Enh: Added support for "illuminate/*" 7.0 (klimov-paul)
 
 
 1.1.0, September 6, 2019
