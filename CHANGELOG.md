@@ -1,6 +1,10 @@
 Yii2 to Laravel Migration Package Change Log
 ============================================
 
+1.1.2, Under development
+------------------------
+
+
 1.1.1, March 4, 2020
 --------------------
 
