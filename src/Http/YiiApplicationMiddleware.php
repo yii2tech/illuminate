@@ -179,7 +179,7 @@ class YiiApplicationMiddleware
         defined('YII_DEBUG') or define('YII_DEBUG', $this->app->get('config')->get('app.debug', false));
 
         if (! defined('YII_ENV')) {
-            $environment = $this->app->get('config')->get('app.debug', 'production');
+            $environment = $this->app->get('config')->get('app.env', 'production');
             switch ($environment) {
                 case 'production':
                     $environment = 'prod';
