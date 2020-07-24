@@ -78,4 +78,49 @@ class RequestTest extends TestCase
 
         $this->assertEquals($data, $request->getBodyParams());
     }
+
+    public function testGetHostInfo()
+    {
+        $illuminateRequest = IlluminateRequest::create('http://example.test');
+
+        $request = (new Request())->setIlluminateRequest($illuminateRequest);
+
+        $this->assertSame('http://example.test', $request->getHostInfo());
+    }
+
+    public function testGetScriptUrl()
+    {
+        $illuminateRequest = IlluminateRequest::create('http://example.test');
+
+        $request = (new Request())->setIlluminateRequest($illuminateRequest);
+
+        $this->assertSame('/index.php', $request->getScriptUrl());
+    }
+
+    public function testGetBaseUrl()
+    {
+        $illuminateRequest = IlluminateRequest::create('http://example.test');
+
+        $request = (new Request())->setIlluminateRequest($illuminateRequest);
+
+        $this->assertSame('', $request->getBaseUrl());
+    }
+
+    public function testGetUrl()
+    {
+        $illuminateRequest = IlluminateRequest::create('http://example.test/some');
+
+        $request = (new Request())->setIlluminateRequest($illuminateRequest);
+
+        $this->assertSame('/some', $request->getUrl());
+    }
+
+    public function testGetPathInfo()
+    {
+        $illuminateRequest = IlluminateRequest::create('http://example.test');
+
+        $request = (new Request())->setIlluminateRequest($illuminateRequest);
+
+        $this->assertSame('', $request->getPathInfo());
+    }
 }

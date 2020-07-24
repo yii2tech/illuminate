@@ -173,6 +173,31 @@ class Request extends \yii\web\Request
 
     /**
      * {@inheritdoc}
+     * @since 1.1.2
+     */
+    public function getScriptUrl()
+    {
+        try {
+            return parent::getScriptUrl();
+        } catch (InvalidConfigException $e) {
+            // Illuminate request does not provide script URL, thus set up a mock, if Yii fails to determine it
+            $this->setScriptUrl('/index.php');
+        }
+
+        return parent::getScriptUrl();
+    }
+
+    /**
+     * {@inheritdoc}
+     * @since 1.1.2
+     */
+    protected function resolveRequestUri()
+    {
+        return $this->getIlluminateRequest()->getRequestUri();
+    }
+
+    /**
+     * {@inheritdoc}
      */
     protected function loadCookies()
     {
