@@ -1,8 +1,8 @@
 Yii2 to Laravel Migration Package Change Log
 ============================================
 
-1.1.2, Under development
-------------------------
+1.1.2, July 24, 2020
+--------------------
 
 - Bug #8: Fixes environment determining (leandrogehlen)
 - Enh #7: `Yii2tech\Illuminate\Yii\Web\Request` now picks up URI info from illuminate one (klimov-paul)
