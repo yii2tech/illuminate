@@ -7,13 +7,13 @@
 
 namespace Yii2tech\Illuminate\Yii\Web;
 
+use Illuminate\Auth\AuthManager;
+use Illuminate\Container\Container;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use RuntimeException;
 use yii\db\BaseActiveRecord;
 use yii\web\IdentityInterface;
-use Illuminate\Auth\AuthManager;
-use Illuminate\Container\Container;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable;
 
 /**
  * User allows usage of the Laravel guard for authenticated user tracking.

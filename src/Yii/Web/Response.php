@@ -7,11 +7,11 @@
 
 namespace Yii2tech\Illuminate\Yii\Web;
 
+use Illuminate\Http\Response as IlluminateResponse;
+use Symfony\Component\HttpFoundation\Cookie;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\web\HeadersAlreadySentException;
-use Symfony\Component\HttpFoundation\Cookie;
-use Illuminate\Http\Response as IlluminateResponse;
 
 /**
  * Response fills up Laravel HTTP response instead of sending itself back to the user agent.

@@ -2,11 +2,11 @@
 
 namespace Yii2tech\Illuminate\Test;
 
-use Yii;
-use yii\helpers\ArrayHelper;
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Facade;
+use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * Base class for the test cases.

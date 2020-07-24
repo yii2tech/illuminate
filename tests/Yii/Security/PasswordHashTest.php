@@ -2,8 +2,8 @@
 
 namespace Yii2tech\Illuminate\Test\Yii\Security;
 
-use yii\base\Security;
 use Illuminate\Hashing\BcryptHasher;
+use yii\base\Security;
 use Yii2tech\Illuminate\Test\TestCase;
 
 class PasswordHashTest extends TestCase

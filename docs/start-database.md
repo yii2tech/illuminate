@@ -27,8 +27,8 @@ Such migration class may look like following:
 ```php
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class InitialMigration extends Migration
 {
@@ -63,8 +63,8 @@ Also former Yii migration history remains, polluting the database. Thus we shoul
 ```php
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class InitialMigration extends Migration
 {

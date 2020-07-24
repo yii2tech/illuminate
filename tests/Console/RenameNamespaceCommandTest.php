@@ -2,8 +2,8 @@
 
 namespace Yii2tech\Illuminate\Test\Console;
 
-use Yii2tech\Illuminate\Test\TestCase;
 use Yii2tech\Illuminate\Console\RenameNamespaceCommand;
+use Yii2tech\Illuminate\Test\TestCase;
 
 class RenameNamespaceCommandTest extends TestCase
 {

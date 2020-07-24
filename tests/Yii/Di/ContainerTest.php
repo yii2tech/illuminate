@@ -2,8 +2,8 @@
 
 namespace Yii2tech\Illuminate\Test\Yii\Di;
 
-use Yii;
 use stdClass;
+use Yii;
 use Yii2tech\Illuminate\Test\TestCase;
 use Yii2tech\Illuminate\Yii\Di\Container;
 

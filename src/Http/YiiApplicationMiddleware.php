@@ -7,15 +7,15 @@
 
 namespace Yii2tech\Illuminate\Http;
 
-use Yii;
 use Closure;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminatech\ArrayFactory\FactoryContract;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Yii;
 use yii\web\HttpException as YiiHttpException;
 use yii\base\ExitException as YiiExitException;
-use Illuminate\Contracts\Foundation\Application;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * YiiApplicationMiddleware is a middleware, which processing Yii web application.

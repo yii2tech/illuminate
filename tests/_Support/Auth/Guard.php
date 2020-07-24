@@ -3,9 +3,9 @@
 namespace Yii2tech\Illuminate\Test\_Support\Auth;
 
 use Illuminate\Auth\GenericUser;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\StatefulGuard;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Mock Auth Guard.

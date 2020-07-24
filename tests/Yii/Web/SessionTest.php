@@ -2,9 +2,9 @@
 
 namespace Yii2tech\Illuminate\Test\Yii\Web;
 
+use Illuminate\Session\NullSessionHandler;
 use Illuminate\Session\Store;
 use Yii2tech\Illuminate\Test\TestCase;
-use Illuminate\Session\NullSessionHandler;
 use Yii2tech\Illuminate\Yii\Web\Session;
 
 class SessionTest extends TestCase

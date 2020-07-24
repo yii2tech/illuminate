@@ -2,10 +2,10 @@
 
 namespace Yii2tech\Illuminate\Test\Yii\DB;
 
+use Illuminate\Database\Schema\Blueprint;
 use Yii;
 use yii\db\Query;
 use Yii2tech\Illuminate\Test\TestCase;
-use Illuminate\Database\Schema\Blueprint;
 
 class ConnectionTest extends TestCase
 {

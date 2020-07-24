@@ -3,11 +3,11 @@
 namespace Yii2tech\Illuminate\Test\Yii\Web;
 
 use Illuminate\Auth\GenericUser;
-use Yii2tech\Illuminate\Yii\Web\User;
-use Yii2tech\Illuminate\Test\TestCase;
 use Illuminate\Database\Schema\Blueprint;
+use Yii2tech\Illuminate\Yii\Web\User;
 use Yii2tech\Illuminate\Test\_Support\Auth\AuthManager;
-use \Yii2tech\Illuminate\Test\_Support\Yii\Models\User as UserModel;
+use Yii2tech\Illuminate\Test\_Support\Yii\Models\User as UserModel;
+use Yii2tech\Illuminate\Test\TestCase;
 
 class UserTest extends TestCase
 {

@@ -8,8 +8,8 @@
 namespace Yii2tech\Illuminate\Console;
 
 use Illuminate\Console\Command;
-use Symfony\Component\Finder\Finder;
 use Illuminate\Console\ConfirmableTrait;
+use Symfony\Component\Finder\Finder;
 
 /**
  * RenameNamespaceCommand allows namespace renaming over the group of files.

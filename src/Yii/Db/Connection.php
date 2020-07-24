@@ -7,8 +7,8 @@
 
 namespace Yii2tech\Illuminate\Yii\Db;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Connection as LaravelConnection;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Connection allows usage of the Laravel DB connection for Yii one.

@@ -7,9 +7,9 @@
 
 namespace Yii2tech\Illuminate\Yii\Log;
 
-use yii\log\Logger;
-use Psr\Log\LogLevel;
 use Illuminate\Log\Logger as LaravelLogger;
+use Psr\Log\LogLevel;
+use yii\log\Logger;
 
 /**
  * Illuminated trait provides bridge to Laravel logger.

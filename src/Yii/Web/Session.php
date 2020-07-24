@@ -8,8 +8,8 @@
 namespace Yii2tech\Illuminate\Yii\Web;
 
 use ArrayIterator;
-use yii\base\Component;
 use Illuminate\Session\Store;
+use yii\base\Component;
 
 /**
  * Session allows usage of the Laravel Session for Yii one.

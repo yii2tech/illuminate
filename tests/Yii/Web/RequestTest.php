@@ -2,10 +2,10 @@
 
 namespace Yii2tech\Illuminate\Test\Yii\Web;
 
+use Illuminate\Http\Request as IlluminateRequest;
 use yii\web\HeaderCollection;
 use Yii2tech\Illuminate\Test\TestCase;
 use Yii2tech\Illuminate\Yii\Web\Request;
-use Illuminate\Http\Request as IlluminateRequest;
 
 class RequestTest extends TestCase
 {

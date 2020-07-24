@@ -7,10 +7,10 @@
 
 namespace Yii2tech\Illuminate\Yii\Web;
 
-use Yii;
-use yii\web\HeaderCollection;
-use yii\base\InvalidConfigException;
 use Illuminate\Http\Request as IlluminateRequest;
+use Yii;
+use yii\base\InvalidConfigException;
+use yii\web\HeaderCollection;
 
 /**
  * Request uses Laravel HTTP request as an input source.

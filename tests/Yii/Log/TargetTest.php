@@ -2,12 +2,12 @@
 
 namespace Yii2tech\Illuminate\Test\Yii\Log;
 
-use yii\log\Logger;
+use Illuminate\Log\Logger as IlluminateLogger;
 use Psr\Log\LogLevel;
 use Psr\Log\Test\TestLogger;
+use yii\log\Logger;
 use Yii2tech\Illuminate\Test\TestCase;
 use Yii2tech\Illuminate\Yii\Log\Target;
-use Illuminate\Log\Logger as IlluminateLogger;
 
 class TargetTest extends TestCase
 {

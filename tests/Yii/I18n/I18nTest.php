@@ -2,11 +2,11 @@
 
 namespace Yii2tech\Illuminate\Test\Yii\I18n;
 
+use Illuminate\Translation\ArrayLoader;
+use Illuminate\Translation\Translator;
 use yii\base\InvalidConfigException;
 use Yii2tech\Illuminate\Test\TestCase;
-use Illuminate\Translation\Translator;
 use Yii2tech\Illuminate\Yii\I18n\I18n;
-use Illuminate\Translation\ArrayLoader;
 
 class I18nTest extends TestCase
 {

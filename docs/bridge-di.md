@@ -40,8 +40,8 @@ class AppServiceProvider extends ServiceProvider
 }
 
 // ...
-use Yii;
 use Illuminate\Container\Container;
+use Yii;
 
 $laravelContainer = Container::getInstance();
 
