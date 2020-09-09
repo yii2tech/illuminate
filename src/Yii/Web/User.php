@@ -62,7 +62,7 @@ class User extends \yii\web\User
         if ($this->_identity === false) {
             $identity = $this->getIlluminateAuthManager()->guard($this->guard)->user();
             if ($identity !== null) {
-                $identity = $this->convertLaravelIdentity($identity);
+                $identity = $this->convertIlluminateIdentity($identity);
             }
 
             $this->_identity = $identity;
@@ -140,7 +140,7 @@ class User extends \yii\web\User
      * @param  mixed  $identity Laravel identity.
      * @return IdentityInterface Yii compatible identity instance.
      */
-    protected function convertLaravelIdentity($identity): IdentityInterface
+    protected function convertIlluminateIdentity($identity): IdentityInterface
     {
         if ($identity instanceof Model) {
             $id = $identity->getKey();

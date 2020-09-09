@@ -5,6 +5,8 @@ Yii2 to Laravel Migration Package Change Log
 -----------------------
 
 - Enh: Added support for "illuminate/*" 8.0 (klimov-paul)
+- Chg: Virtual property `Connection::$laravelConnection` renamed to `Connection::$illuminateConnection` (klimov-paul)
+- Chg: Method `User::convertLaravelIdentity()` renamed to `User::convertIlluminateIdentity()` (klimov-paul)
 
 
 1.1.2, July 24, 2020

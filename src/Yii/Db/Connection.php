@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\DB;
  *
  * @see \Illuminate\Database\Connection
  *
- * @property \Illuminate\Database\Connection $laravelConnection related Laravel DB connection.
+ * @property \Illuminate\Database\Connection $illuminateConnection related Laravel DB connection.
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 1.0
@@ -42,7 +42,7 @@ class Connection extends \yii\db\Connection
     /**
      * @var \Illuminate\Database\Connection Laravel DB connection instance.
      */
-    private $_laravelConnection;
+    private $_illuminateConnection;
 
     /**
      * {@inheritdoc}
@@ -53,7 +53,7 @@ class Connection extends \yii\db\Connection
             return;
         }
 
-        $this->pdo = $this->getLaravelConnection()->getPdo();
+        $this->pdo = $this->getIlluminateConnection()->getPdo();
     }
 
     /**
@@ -65,7 +65,7 @@ class Connection extends \yii\db\Connection
             return;
         }
 
-        $this->getLaravelConnection()->disconnect();
+        $this->getIlluminateConnection()->disconnect();
 
         $this->pdo = null;
     }
@@ -74,9 +74,9 @@ class Connection extends \yii\db\Connection
      * @param  LaravelConnection  $connection Laravel DB connection to be used.
      * @return static self reference.
      */
-    public function setLaravelConnection(LaravelConnection $connection): self
+    public function setIlluminateConnection(LaravelConnection $connection): self
     {
-        $this->_laravelConnection = $connection;
+        $this->_illuminateConnection = $connection;
 
         return $this;
     }
@@ -86,13 +86,13 @@ class Connection extends \yii\db\Connection
      *
      * @return \Illuminate\Database\Connection connection instance.
      */
-    public function getLaravelConnection(): LaravelConnection
+    public function getIlluminateConnection(): LaravelConnection
     {
-        if ($this->_laravelConnection === null) {
-            $this->_laravelConnection = $this->defaultLaravelConnection();
+        if ($this->_illuminateConnection === null) {
+            $this->_illuminateConnection = $this->defaultIlluminateConnection();
         }
 
-        return $this->_laravelConnection;
+        return $this->_illuminateConnection;
     }
 
     /**
@@ -100,7 +100,7 @@ class Connection extends \yii\db\Connection
      *
      * @return LaravelConnection Laravel connection instance.
      */
-    protected function defaultLaravelConnection(): LaravelConnection
+    protected function defaultIlluminateConnection(): LaravelConnection
     {
         return DB::connection();
     }
