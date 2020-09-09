@@ -1,8 +1,8 @@
 Yii2 to Laravel Migration Package Change Log
 ============================================
 
-1.2.0 Under Development
------------------------
+1.2.0, September 9, 2020
+------------------------
 
 - Enh: Added support for "illuminate/*" 8.0 (klimov-paul)
 - Chg: Virtual property `Connection::$laravelConnection` renamed to `Connection::$illuminateConnection` (klimov-paul)
