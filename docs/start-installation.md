@@ -71,18 +71,16 @@ Thus in the end your 'composer.json' file will look like following:
         "yiisoft/yii2": "~2.0.14",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
-        "yii2tech/illuminate": "~1.1.0",
+        "yii2tech/illuminate": "^1.2.0",
         ...
     },
     "autoload": {
-            "psr-4": {
-                "App\\": "app/",
-                "legacy\\": "legacy/"
-            },
-            "classmap": [
-                "database/seeds",
-                "database/factories"
-            ]
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/",
+            "legacy\\": "legacy/"
+        }
     },
     "repositories": [
         {
