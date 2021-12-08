@@ -3,8 +3,8 @@
 namespace Yii2tech\Illuminate\Test\Yii\Log;
 
 use Illuminate\Log\Logger as IlluminateLogger;
+use Psr\Log\AbstractLogger;
 use Psr\Log\LogLevel;
-use Psr\Log\Test\TestLogger;
 use yii\log\Logger;
 use Yii2tech\Illuminate\Test\TestCase;
 use Yii2tech\Illuminate\Yii\Log\Target;
@@ -13,7 +13,19 @@ class TargetTest extends TestCase
 {
     public function testExport()
     {
-        $testLogger = new TestLogger();
+        $testLogger = $this->getMockBuilder(AbstractLogger::class)
+            ->onlyMethods(['log'])
+            ->getMock();
+
+        $logRecords = [];
+
+        $testLogger->method('log')->willReturnCallback(function ($level, $message, $context) use (&$logRecords) {
+            $logRecords[] = [
+                'level' => $level,
+                'message' => $message,
+                'context' => $context,
+            ];
+        });
 
         $target = (new Target())->setIlluminateLogger(new IlluminateLogger($testLogger));
 
@@ -24,12 +36,13 @@ class TargetTest extends TestCase
         $target->export();
 
         $expectedRecord = [
+            'level' => LogLevel::DEBUG,
             'message' => 'log message',
             'context' => [
                 'time' => 123456789,
                 'category' => 'test',
             ],
         ];
-        $this->assertTrue($testLogger->hasRecord($expectedRecord, LogLevel::DEBUG));
+        $this->assertEquals($expectedRecord, $logRecords[0]);
     }
 }

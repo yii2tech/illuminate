@@ -1,6 +1,6 @@
 <?php
 
-namespace Yii2tech\Illuminate\Test\Yii\DB;
+namespace Yii2tech\Illuminate\Test\Yii\Db;
 
 use Illuminate\Database\Schema\Blueprint;
 use Yii;

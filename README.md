@@ -13,7 +13,7 @@ For license information check the [LICENSE](LICENSE.md)-file.
 
 [![Latest Stable Version](https://poser.pugx.org/yii2tech/illuminate/v/stable.png)](https://packagist.org/packages/yii2tech/illuminate)
 [![Total Downloads](https://poser.pugx.org/yii2tech/illuminate/downloads.png)](https://packagist.org/packages/yii2tech/illuminate)
-[![Build Status](https://travis-ci.org/yii2tech/illuminate.svg?branch=master)](https://travis-ci.org/yii2tech/illuminate)
+[![Build Status](https://github.com/yii2tech/illuminate/workflows/build/badge.svg)](https://github.com/yii2tech/illuminate/actions)
 
 
 Installation

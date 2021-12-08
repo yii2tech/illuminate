@@ -64,7 +64,7 @@ Thus in the end your 'composer.json' file will look like following:
     "name": "my/project",
     ...
     "require": {
-        "php": "^7.2",
+        "php": "^7.2 || ^8.0",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
