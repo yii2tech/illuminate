@@ -145,4 +145,12 @@ class Guard implements StatefulGuard
     {
         $this->user = null;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasUser()
+    {
+        return $this->user !== null;
+    }
 }
