@@ -1,6 +1,13 @@
 Yii2 to Laravel Migration Package Change Log
 ============================================
 
+1.3.0 Under Development
+-----------------------
+
+- Bug: Fixed compatibility with "symfony/http-foundation" 6.x for `DummyResponse::send()` (klimov-paul)
+- Bug #13: Fixed `Yii2tech\Illuminate\Yii\Log\Logger` and `Yii2tech\Illuminate\Yii\Caching\Cache` unable to pick up default related Illuminate object (klimov-paul)
+
+
 1.2.1, February 9, 2022
 -----------------------
 

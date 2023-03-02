@@ -4,6 +4,7 @@ namespace Yii2tech\Illuminate\Test\Yii\Caching;
 
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Cache\Repository;
+use Illuminate\Contracts\Cache\Factory;
 use Yii2tech\Illuminate\Test\TestCase;
 use Yii2tech\Illuminate\Yii\Caching\Cache;
 
@@ -44,10 +45,16 @@ class CacheTest extends TestCase
 
     public function testGetDefaultIlluminateCache()
     {
-        $this->app->instance('cache', new Repository(new ArrayStore()));
+        $cacheManagerMock = $this->getMockBuilder(Factory::class)
+            ->onlyMethods(['store'])
+            ->getMock();
+
+        $cacheManagerMock->method('store')->willReturn(new Repository(new ArrayStore()));
+
+        $this->app->instance('cache', $cacheManagerMock);
 
         $cache = new Cache();
 
-        $this->assertSame($this->app->make('cache'), $cache->getIlluminateCache());
+        $this->assertSame($cacheManagerMock->store(), $cache->getIlluminateCache());
     }
 }

@@ -75,7 +75,7 @@ class Cache extends \yii\caching\Cache
      */
     protected function defaultIlluminateCache(): Repository
     {
-        return \Illuminate\Support\Facades\Cache::getFacadeRoot();
+        return \Illuminate\Support\Facades\Cache::getFacadeRoot()->store();
     }
 
     /**

@@ -7,7 +7,7 @@
 
 namespace Yii2tech\Illuminate\Yii\Log;
 
-use Illuminate\Log\Logger as LaravelLogger;
+use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use yii\log\Logger;
 
@@ -18,7 +18,7 @@ use yii\log\Logger;
  *
  * @mixin \yii\base\Component
  *
- * @property \Illuminate\Log\Logger $illuminateLogger related Laravel logger instance.
+ * @property \Psr\Log\LoggerInterface $illuminateLogger related Laravel logger instance.
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 1.0
@@ -31,9 +31,9 @@ trait Illuminated
     private $_illuminateLogger;
 
     /**
-     * @return \Illuminate\Log\Logger
+     * @return \Psr\Log\LoggerInterface
      */
-    public function getIlluminateLogger(): LaravelLogger
+    public function getIlluminateLogger(): LoggerInterface
     {
         if ($this->_illuminateLogger === null) {
             $this->_illuminateLogger = $this->defaultIlluminateLogger();
@@ -43,10 +43,10 @@ trait Illuminated
     }
 
     /**
-     * @param  \Illuminate\Log\Logger  $laravelLogger
+     * @param  \Psr\Log\LoggerInterface  $laravelLogger
      * @return static self reference.
      */
-    public function setIlluminateLogger(LaravelLogger $laravelLogger): self
+    public function setIlluminateLogger(LoggerInterface $laravelLogger): self
     {
         $this->_illuminateLogger = $laravelLogger;
 
@@ -56,9 +56,9 @@ trait Illuminated
     /**
      * Returns default value for {@see $illuminateLogger}
      *
-     * @return Logger logger instance.
+     * @return \Psr\Log\LoggerInterface logger instance.
      */
-    protected function defaultIlluminateLogger(): Logger
+    protected function defaultIlluminateLogger(): LoggerInterface
     {
         return \Illuminate\Support\Facades\Log::getFacadeRoot();
     }

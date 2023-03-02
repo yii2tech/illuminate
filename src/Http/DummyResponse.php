@@ -24,7 +24,7 @@ class DummyResponse extends Response
     /**
      * {@inheritdoc}
      */
-    public function send()
+    public function send(): static
     {
         return $this;
     }
