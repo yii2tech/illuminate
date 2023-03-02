@@ -17,9 +17,9 @@
     "require": {
         "php": ">= 8.0",
         "yiisoft/yii2": "~2.0.14",
-        "illuminate/console": "^6.0 || ^7.0 || ^8.0 || ^9.0",
-        "illuminate/http": "^6.0 || ^7.0 || ^8.0 || ^9.0",
-        "illuminatech/array-factory": "^1.2.3"
+        "illuminate/console": "^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0",
+        "illuminate/http": "^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0",
+        "illuminatech/array-factory": "^1.2.4"
     },
     "require-dev": {
         "illuminate/auth": "*",
@@ -30,7 +30,7 @@
         "illuminate/hashing": "*",
         "illuminate/log": "*",
         "illuminate/translation": "*",
-        "phpunit/phpunit": "^7.5 || ^8.0 || ^9.3"
+        "phpunit/phpunit": "^7.5 || ^8.0 || ^9.3 || ^10.0.7"
     },
     "repositories": [
         {
