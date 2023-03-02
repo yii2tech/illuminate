@@ -9,7 +9,7 @@ with 404 code as an indicator, that request handling should be passed forward to
 Make sure you do not enable Yii error handler manually and do not register any other error handler except the one, provided
 by Laravel application.
 
-In case you used custom views for HTTP error rendering in Yii, you should convert them to [Laravel ones](https://laravel.com/docs/6.0/errors#custom-http-error-pages).
+In case you used custom views for HTTP error rendering in Yii, you should convert them to [Laravel ones](https://laravel.com/docs/10.x/errors#custom-http-error-pages).
 
 In case you used your own error handler with some custom logic around particular exception processing, you should transfer
 this logic to the error handler, provided by Laravel.

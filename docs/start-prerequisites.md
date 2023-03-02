@@ -5,7 +5,7 @@ Before start the project migration you should perform some basic steps to be pre
 
 ## PHP
 
-Make sure your Yii2 project is running on PHP >= 7.2. The project should not only be compatible with it, but have
+Make sure your Yii2 project is running on PHP >= 8.0. The project should not only be compatible with it, but have
 it as a background in any environment, which it can be deployed into, like dev server, stage and production ones.
 
 ## Yii

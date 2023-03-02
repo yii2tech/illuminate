@@ -64,14 +64,15 @@ Thus in the end your 'composer.json' file will look like following:
     "name": "my/project",
     ...
     "require": {
-        "php": "^7.2 || ^8.0",
-        "fideloper/proxy": "^4.0",
-        "laravel/framework": "^6.0",
-        "laravel/tinker": "^1.0",
+        "php": "^8.0",
+        "guzzlehttp/guzzle": "^7.2",
+        "laravel/framework": "^10.0",
+        "laravel/sanctum": "^3.2",
+        "laravel/tinker": "^2.8",
         "yiisoft/yii2": "~2.0.14",
-        "yiisoft/yii2-bootstrap": "~2.0.0",
+        "yiisoft/yii2-bootstrap5": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
-        "yii2tech/illuminate": "^1.2.0",
+        "yii2tech/illuminate": "^1.3.0",
         ...
     },
     "autoload": {
@@ -227,7 +228,7 @@ class Kernel extends HttpKernel
 {
     protected $middleware = [
         // ...
-        \Yii2tech\Illuminate\Http\YiiApplicationMiddleware::class.':legacy-frontend/public/index.php',
+        \Yii2tech\Illuminate\Http\YiiApplicationMiddleware::class.':legacy/frontend/public/index.php',
     ];
     // ...
 }

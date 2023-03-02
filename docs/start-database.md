@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Schema;
 
 class InitialMigration extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::getConnection()->statement(<<<SQL
 # Your SQL dump lines here
@@ -68,7 +68,7 @@ use Illuminate\Support\Facades\Schema;
 
 class InitialMigration extends Migration
 {
-    public function up()
+    public function up(): void
     {
         // Drop the legacy Yii migration history table:
         Schema::dropIfExists('migration');
