@@ -9,7 +9,7 @@
 | Q                         | A
 | ------------------------- | ---
 | This Package Version      | 1.?.?
-| Laravel Framework Version | 10.?.?
+| Laravel Framework Version | 11.?.?
 | Yii Framework Version     | 2.0.?
 | PHP version               | 
 | Operating system          |
